@@ -1,10 +1,10 @@
 <template>
-  <FirstComp/>
+  <nav> 
+    <router-link to="/"> Home </router-link> |
+    <router-link to="/monitoring"> Monitoring </router-link>
+  </nav>
+  <router-view/>
 </template>
-
-<script setup>
-import FirstComp from './components/FirstComp.vue'
-</script>
 
 <style>
 #app {
@@ -14,5 +14,15 @@ import FirstComp from './components/FirstComp.vue'
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+a {
+  text-decoration: none;
+  color: beige;
+}
+
+.router-link-active {
+  font-weight: bold;
+  color: aquamarine;
 }
 </style>
