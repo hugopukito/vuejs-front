@@ -1,3 +1,4 @@
 <template>
-    <h1> coucou </h1>
+    <h1> pukito </h1>
+    <img src="@/assets/luffy.jpg">
 </template>
