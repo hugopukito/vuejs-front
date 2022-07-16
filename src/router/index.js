@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router"
 import Home from "@/views/Home.vue"
 import Monitoring from "@/views/Monitoring.vue"
+import Chat from "@/views/Chat.vue"
 import NotFound from "@/views/NotFound.vue"
 
 const routes = [
@@ -18,6 +19,14 @@ const routes = [
         component: Monitoring,
         meta: {
             title: "monitoring"
+        }
+    },
+    {
+        name: "Chat",
+        path: "/chat",
+        component: Chat,
+        meta: {
+            title: "chat"
         }
     },
     {

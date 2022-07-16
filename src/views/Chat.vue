@@ -1,0 +1,53 @@
+<template>
+  <Input @submit="createMsg" />
+  <div v-if = isLoading><h1>loading...</h1></div>
+  <div class="msgs" v-else>
+    <div class="msg" v-for="(item, index) in msg" :key="index">
+        {{item}}
+    </div>
+  </div>
+</template>
+
+<script setup>
+
+import { ref, onMounted } from "vue"
+import axios from "axios"
+import Input from "@/components/Input.vue"
+
+let isLoading = ref(true)
+let msg = ref(String)
+
+onMounted(getMsg())
+
+async function getMsg () {
+    await axios.get("http://77.136.126.254:8080/")
+    .then(resp => {
+        msg.value = resp.data
+        isLoading.value = false
+    })
+}
+
+function createMsg(nom, message) {
+    const obj = {
+        "nom": nom.value,
+        "message": message.value
+    };
+    isLoading.value = true
+    axios.post("http://77.136.126.254:8080/post", JSON.stringify(obj))
+    .then(getMsg())
+}
+</script>
+
+<style scoped>
+h1 {
+    color: aquamarine;
+}
+.msgs{
+    padding-top: 40px;
+}
+.msg{
+    padding-top: 20px;
+    font-size: 30px;
+    color:chocolate;
+}
+</style>

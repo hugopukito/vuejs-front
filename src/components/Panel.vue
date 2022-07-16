@@ -11,3 +11,9 @@ import { ref } from "vue"
 const msg = ref("Monitoring")
 
 </script>
+
+<style scoped>
+h1 {
+    color: orange;
+}
+</style>
