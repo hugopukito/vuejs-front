@@ -1,7 +1,9 @@
 <template>
-  <input v-model="nom" placeholder="nom" />
-  <input @keyup.enter="submit" v-model="message" placeholder="message" />
-  <button @click="submit">Envoyer</button>
+  <div class="form__group field">
+    <input v-model="nom" placeholder="Nom" />
+    <input @keyup.enter="submit" v-model="message" placeholder="Message" />
+    <button @click="submit">Envoyer</button>
+  </div>
 </template>
 
 <script setup>
