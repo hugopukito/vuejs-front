@@ -22,13 +22,29 @@ import Input from "@/components/Input.vue"
 let isLoading = ref(true)
 let msg = ref(String)
 
-onMounted(getMsg())
+onMounted(() => {
+    getMsg(),
+    refresh()
+})
 
 async function getMsg () {
     await axios.get("http://77.136.126.254:8080/")
     .then(resp => {
         msg.value = resp.data
         isLoading.value = false
+    })
+}
+
+function refresh() {
+    setInterval(function() {
+        getMsgRefresh()
+    }, 1000)
+}
+
+async function getMsgRefresh () {
+    await axios.get("http://77.136.126.254:8080/")
+    .then(resp => {
+        msg.value = resp.data
     })
 }
 
