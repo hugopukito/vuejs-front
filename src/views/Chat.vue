@@ -4,10 +4,10 @@
   <div class="msgs" v-else>
     <div class="msg" v-for="(item, index) in msg" :key="index">
         <div class="element">
-            <div class="nom"> {{ item.nom }} </div>
+            <div class="nom"> {{ msg[msg.length-1-index].nom }} </div>
         </div>
         <div class="element">
-            <div class="message"> {{ item.message }} </div>
+            <div class="message"> {{ msg[msg.length-1-index].message }} </div>
         </div>
     </div>
   </div>

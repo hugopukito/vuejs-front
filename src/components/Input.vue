@@ -1,7 +1,7 @@
 <template>
   <input v-model="nom" placeholder="nom" />
-  <input v-model="message" placeholder="message" />
-  <button @click="submit">Submit</button>
+  <input @keyup.enter="submit" v-model="message" placeholder="message" />
+  <button @click="submit">Envoyer</button>
 </template>
 
 <script setup>
