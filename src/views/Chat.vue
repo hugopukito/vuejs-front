@@ -28,7 +28,7 @@ onMounted(() => {
 })
 
 async function getMsg () {
-    await axios.get("http://77.136.126.254:8080/")
+    await axios.get("https://hugopukito.com/api")
     .then(resp => {
         msg.value = resp.data
         isLoading.value = false
@@ -42,7 +42,7 @@ function refresh() {
 }
 
 async function getMsgRefresh () {
-    await axios.get("http://77.136.126.254:8080/")
+    await axios.get("https://hugopukito.com/api")
     .then(resp => {
         msg.value = resp.data
     })
@@ -54,7 +54,7 @@ function createMsg(nom, message) {
         "message": message.value
     };
     isLoading.value = true
-    axios.post("http://77.136.126.254:8080/post", JSON.stringify(obj))
+    axios.post("https://hugopukito.com/api/post", JSON.stringify(obj))
     .then(getMsg())
 }
 </script>
