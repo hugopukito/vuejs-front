@@ -9,6 +9,10 @@
 
 <style scoped>
 
+nav {
+  margin-top: 50px;
+}
+
 a {
   text-decoration: none;
   color: beige;
@@ -17,5 +21,11 @@ a {
 .router-link-active {
   font-weight: bold;
   color: aquamarine;
+}
+
+@media screen and (max-device-width: 480px) {
+  nav {
+    margin-top: 25px;
+  }
 }
 </style>
