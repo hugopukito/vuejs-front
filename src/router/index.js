@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router"
 import Home from "@/views/Home.vue"
+import Topics from "@/views/Topics.vue"
 import Monitoring from "@/views/Monitoring.vue"
 import Chat from "@/views/Chat.vue"
 import NotFound from "@/views/NotFound.vue"
@@ -11,6 +12,14 @@ const routes = [
         component: Home,
         meta: {
             title: "pukito"
+        }
+    },
+    {
+        name: "Topics",
+        path: "/topics",
+        component: Topics,
+        meta: {
+            title: "topics"
         }
     },
     {

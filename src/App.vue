@@ -1,8 +1,11 @@
 <template>
   <nav> 
-    <router-link to="/"> Home </router-link> |
-    <router-link to="/monitoring"> Monitoring </router-link> |
-    <router-link to="/chat"> Chat </router-link>
+    <ul>
+      <li><router-link to="/"> Home </router-link> </li>
+      <li><router-link to="/topics"> Topics </router-link> </li>
+      <li><router-link to="/monitoring"> Monitoring </router-link> </li>
+      <li><router-link to="/chat"> Chat </router-link> </li>
+    </ul>
   </nav>
   <router-view/>
 </template>
@@ -10,12 +13,34 @@
 <style scoped>
 
 nav {
-  margin-top: 50px;
+  list-style: none;
+  text-align: center;
 }
 
-a {
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  text-align: center;
+}
+
+li {
+  display: inline;
+}
+
+li a {
+  display: inline-block;
   text-decoration: none;
+  text-align: center;
+  font-size: 20px;
   color: beige;
+  padding: 14px 16px;
+}
+
+li a:hover {
+  background-color: #111;
 }
 
 .router-link-active {
@@ -24,8 +49,11 @@ a {
 }
 
 @media screen and (max-device-width: 480px) {
-  nav {
-    margin-top: 25px;
+  li a{
+    font-size: 16px;
   }
+  li a:hover {
+  background-color: #333;
+}
 }
 </style>

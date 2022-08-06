@@ -5,7 +5,7 @@
 <style scoped>
 
 img {
-  margin-top: 25px;
+  margin-top: 40px;
   width: 24%;
   padding-bottom: 0px;
 }
