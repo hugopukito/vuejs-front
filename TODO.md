@@ -1,9 +1,11 @@
 # TODO list
 
+## design
+
+logo white beard op top left navbar
+
 ## topics navbar
 reponsive
-
-## change scroll bar style
 
 ## topics
 hardware -> pi4 (bonus fat unreadable) + mecanical keyboard

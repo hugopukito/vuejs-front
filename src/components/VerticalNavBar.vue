@@ -1,16 +1,12 @@
 <template>
   <nav>
-  <ul>
-    <li><a href="#section-1">Section 1</a></li>
-    <li><a href="#section-2">Section 2</a></li>
-    <li><a href="#section-3">Section 3</a></li>
-    <li><a href="#section-4">Section 4</a></li>
-    <li><a href="#section-5">Section 5</a></li>
-    <li><a href="#section-6">Section 6</a></li>
-    <li><a href="#section-7">Section 7</a></li>
-    <li><a href="#section-8">Section 8</a></li>
-    <li><a href="#section-9">Section 9</a></li>
-  </ul>
+    <ul>
+      <li><a href="#hardware">Hardware</a></li>
+      <li><a href="#os">Os</a></li>
+      <li><a href="#ssh">Ssh</a></li>
+      <li><a href="#https">Https</a></li>
+      <li><a href="#nginx">Nginx</a></li>
+    </ul>
 </nav>
 </template>
 
@@ -39,7 +35,10 @@ nav ul li a {
   color: white;
   text-decoration: none;
 }
+nav ul li a:hover {
+  background-color: #111;
+}
 nav ul li a.current {
-  background: black;
+  background: #111;
 }
 </style>
