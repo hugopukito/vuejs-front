@@ -33,7 +33,7 @@ li a {
   display: inline-block;
   text-decoration: none;
   text-align: center;
-  font-size: 20px;
+  font-size: 1.25rem;
   color: beige;
   padding: 14px 16px;
 }

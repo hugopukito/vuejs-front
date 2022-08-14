@@ -1,6 +1,6 @@
 <template>
-  <div class="grid">
-    <vertical-nav-bar/>
+  <div id="grid" class="grid">
+    <vertical-nav-bar :temp="section"/>
     <div class="main">
       <div class="h1"> IT topics of usefull things </div>
       <div id="hardware">
@@ -18,27 +18,27 @@
             blanditiis expedita? Earum eligendi pariatur quaerat quos expedita ab
              quibusdam ratione veniam in, mollitia fuga repudiandae?</div>
       </div>
-      <section id="ssh">
+      <div id="ssh">
         <div class="h2">Ssh</div>
         <div class="content">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, 
             blanditiis expedita? Earum eligendi pariatur quaerat quos expedita ab
              quibusdam ratione veniam in, mollitia fuga repudiandae?</div>
-      </section>
-      <section id="https">
+      </div>
+      <div id="https">
         <div class="h2">Https</div>
         <div class="content">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, 
             blanditiis expedita? Earum eligendi pariatur quaerat quos expedita ab
              quibusdam ratione veniam in, mollitia fuga repudiandae?</div>
-      </section>
-      <section id="nginx">
+      </div>
+      <div id="nginx">
         <div class="h2">Nginx</div>
         <div class="content">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, 
             blanditiis expedita? Earum eligendi pariatur quaerat quos expedita ab
              quibusdam ratione veniam in, mollitia fuga repudiandae?</div>
-      </section>
+      </div>
     </div>
     <footer>&copy; pukito</footer>
   </div>
@@ -46,7 +46,6 @@
 
 <style scoped>
 .grid {
-  margin: 0;
   display: grid;
   grid-template-columns: min-content;
   color:beige;
@@ -54,7 +53,7 @@
 
 .h1 {
   /* background-color: blueviolet; */
-  font-size: 30px;
+  font-size: 2rem;
   margin-top: 20px;
   margin-bottom: 30px;
   color: orange;
@@ -62,7 +61,7 @@
 
 .h2 {
   /* background-color:darkgreen; */
-  font-size: 25px;
+  font-size: 1.5rem;
   margin-top: 20px;
   margin-bottom: 30px;
 }
@@ -88,32 +87,22 @@ footer {
 }
 
 @media screen and (max-device-width: 480px) {
-  h1 {
-    margin-top: 30px;
-    font-size: 22px;
+  .grid {
+    display: initial;
   }
 }
 </style>
 
 <script setup>
+import { ref } from "vue"
 import VerticalNavBar from "@/components/VerticalNavBar.vue"
 
-let mainNavLinks = document.querySelectorAll("nav ul li a");
+let section = "test"
 
-window.addEventListener("scroll", () => {
-  let fromTop = window.scrollY;
+// console.log(document.getElementById("grid").querySelectorAll("."))
 
-  mainNavLinks.forEach(link => {
-    let section = document.querySelector(link.hash);
-
-    if (
-      section.offsetTop <= fromTop &&
-      section.offsetTop + section.offsetHeight > fromTop
-    ) {
-      link.classList.add("current");
-    } else {
-      link.classList.remove("current");
-    }
-  });
-});
+// window.onscroll = function() {myFunction()}
+// function myFunction() {
+//   console.log("coucou")
+// }
 </script>
