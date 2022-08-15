@@ -1,44 +1,39 @@
 <template>
-  <div id="grid" class="grid">
+  <div class="grid">
     <vertical-nav-bar :temp="section"/>
     <div class="main">
       <div class="h1"> IT topics of usefull things </div>
-      <div id="hardware">
-          <div class="h2">Hardware</div>
-          <div class="content">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, 
-            blanditiis expedita? Earum eligendi pariatur quaerat quos expedita ab
-             quibusdam ratione veniam in, mollitia fuga repudiandae?
-             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis,</div>
-      </div>
-      <div id="os">
+      <section id="hardware">
+        <div class="h2">Hardware</div>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, 
+        blanditiis expedita? Earum eligendi pariatur quaerat quos expedita ab
+        quibusdam ratione veniam in, mollitia fuga repudiandae?
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis,
+      </section>
+      <section id="os">
         <div class="h2">Os</div>
-        <div class="content">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, 
-            blanditiis expedita? Earum eligendi pariatur quaerat quos expedita ab
-             quibusdam ratione veniam in, mollitia fuga repudiandae?</div>
-      </div>
-      <div id="ssh">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, 
+        blanditiis expedita? Earum eligendi pariatur quaerat quos expedita ab
+        quibusdam ratione veniam in, mollitia fuga repudiandae?
+      </section>
+      <section id="ssh">
         <div class="h2">Ssh</div>
-        <div class="content">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, 
-            blanditiis expedita? Earum eligendi pariatur quaerat quos expedita ab
-             quibusdam ratione veniam in, mollitia fuga repudiandae?</div>
-      </div>
-      <div id="https">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, 
+        blanditiis expedita? Earum eligendi pariatur quaerat quos expedita ab
+        quibusdam ratione veniam in, mollitia fuga repudiandae?
+      </section>
+      <section id="https">
         <div class="h2">Https</div>
-        <div class="content">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, 
-            blanditiis expedita? Earum eligendi pariatur quaerat quos expedita ab
-             quibusdam ratione veniam in, mollitia fuga repudiandae?</div>
-      </div>
-      <div id="nginx">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, 
+        blanditiis expedita? Earum eligendi pariatur quaerat quos expedita ab
+        quibusdam ratione veniam in, mollitia fuga repudiandae?
+      </section>
+      <section id="nginx">
         <div class="h2">Nginx</div>
-        <div class="content">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, 
-            blanditiis expedita? Earum eligendi pariatur quaerat quos expedita ab
-             quibusdam ratione veniam in, mollitia fuga repudiandae?</div>
-      </div>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, 
+        blanditiis expedita? Earum eligendi pariatur quaerat quos expedita ab
+        quibusdam ratione veniam in, mollitia fuga repudiandae?
+      </section>
     </div>
     <footer>&copy; pukito</footer>
   </div>
@@ -62,18 +57,16 @@
 .h2 {
   /* background-color:darkgreen; */
   font-size: 1.5rem;
-  margin-top: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
-.content {
+section {
   background-color: crimson;
   min-height: 100px;
   width: 60vw;
   margin: 0 auto;
   padding: 10px;
-  display: flex;
-  align-items: center;
+  margin-bottom: 30px;
 }
 
 footer {
@@ -94,15 +87,9 @@ footer {
 </style>
 
 <script setup>
-import { ref } from "vue"
+import { onMounted, ref } from "vue"
 import VerticalNavBar from "@/components/VerticalNavBar.vue"
 
 let section = "test"
 
-// console.log(document.getElementById("grid").querySelectorAll("."))
-
-// window.onscroll = function() {myFunction()}
-// function myFunction() {
-//   console.log("coucou")
-// }
 </script>

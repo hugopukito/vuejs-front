@@ -12,7 +12,7 @@
 
 <script setup>
 const props = defineProps(["temp"])
-console.log(props.temp)
+//console.log(props.temp)
 </script>
 
 <style scoped>
