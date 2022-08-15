@@ -1,6 +1,6 @@
 <template>
   <div class="grid">
-    <vertical-nav-bar :temp="section"/>
+    <vertical-nav-bar :sections="sections"/>
     <div class="main">
       <div class="h1"> IT topics of usefull things </div>
       <section id="hardware">
@@ -90,6 +90,11 @@ footer {
 import { onMounted, ref } from "vue"
 import VerticalNavBar from "@/components/VerticalNavBar.vue"
 
-let section = "test"
+let sections
+
+onMounted(() => {
+  const sections = document.querySelectorAll("section");
+  console.log(sections)
+})
 
 </script>
