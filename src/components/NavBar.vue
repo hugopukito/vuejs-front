@@ -33,7 +33,7 @@ li a {
   display: inline-block;
   text-decoration: none;
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 1.25em;
   color: beige;
   padding: 14px 16px;
 }
@@ -48,9 +48,6 @@ li a:hover {
 }
 
 @media screen and (max-device-width: 480px) {
-  li a{
-    font-size: 16px;
-  }
   li a:hover {
   background-color: #333;
 }

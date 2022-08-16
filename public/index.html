@@ -30,22 +30,30 @@
 body {
   padding: 0px;
   margin: 0px;
-  font-size: 15px;
+  font-size: 16px;
 }
 
-body::-webkit-scrollbar {
-  width: 0.25rem;
+/* @media screen and (max-device-width: 480px) {
+  body {
+    font-size: 16px;
+  } 
+} */
+
+::-webkit-scrollbar {
+  width: 0.35em !important;
+  -webkit-overflow-scrolling: auto !important;
+  -webkit-appearance: none;
 }
 
-body::-webkit-scrollbar-track {
-  background: #37474F;
+::-webkit-scrollbar-track {
+  background: #37474F !important;
 }
 
-body::-webkit-scrollbar-thumb {
-  background: orange;
+::-webkit-scrollbar-thumb {
+  background: orange !important;
 }
 
-body::-webkit-scrollbar-thumb:hover {
-  background: crimson;
+::-webkit-scrollbar-thumb:hover {
+  background: crimson !important;
 }
 </style>
