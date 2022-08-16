@@ -16,4 +16,11 @@ const msg = ref("Monitoring")
 h1 {
     color: orange;
 }
+
+@media screen and (max-device-width: 480px) {
+  iframe {
+    width: 100vw;
+    height: 30vh;
+  }
+}
 </style>
