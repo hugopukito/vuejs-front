@@ -38,28 +38,25 @@
       <section id="ssh">
         <div class="h2">Ssh</div>
         <div class="text">
-          <span>&#9888;</span><br><br><br>
-          <span>&#9888;</span><br><br><br>
-          <span>&#9888;</span><br><br><br>
-          <span>&#9888;</span><br>
+          <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
         </div>
       </section>
       <section id="https">
         <div class="h2">Https</div>
         <div class="text">
-          <span>&#9888;</span><br><br><br>
-          <span>&#9888;</span><br><br><br>
-          <span>&#9888;</span><br><br><br>
-          <span>&#9888;</span><br>
+          <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
         </div>
       </section>
       <section id="nginx">
         <div class="h2">Nginx</div>
         <div class="text">
-          <span>&#9888;</span><br><br><br>
-          <span>&#9888;</span><br><br><br>
-          <span>&#9888;</span><br><br><br>
-          <span>&#9888;</span><br>
+          <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
+          <span>&#9888;</span> <br><br><br><br><br><br>
+          <span>&#9888;</span> <br><br><br><br><br><br>
+          <span>&#9888;</span> <br><br><br><br><br><br>
+          <span>&#9888;</span> <br><br><br><br><br><br>
+          <span>&#9888;</span> <br><br><br><br><br><br>
+          <span>&#9888;</span> <br><br><br><br><br><br>
         </div>
       </section>
     </div>

@@ -1,19 +1,38 @@
 <template>
-  <nav> 
+  <div id ="box" class="box">
+    <img @click="trigger_navbar" class="whiteBeard" src="@/assets/white_beard_nobg.png">
+    <div style="margin: 5px"> Menu </div>
+    <img class="luffy" src="@/assets/luffy.png">
+  </div>
+  <nav id="nav"> 
     <ul>
-      <li><router-link to="/"> Home </router-link> </li>
-      <li><router-link to="/topics"> Topics </router-link> </li>
-      <li><router-link to="/monitoring"> Monitoring </router-link> </li>
-      <li><router-link to="/chat"> Chat </router-link> </li>
+      <li><router-link to="/" @click="trigger_navbar"> Home </router-link> </li>
+      <li><router-link to="/topics" @click="trigger_navbar"> Topics </router-link> </li>
+      <li><router-link to="/monitoring" @click="trigger_navbar"> Monitoring </router-link> </li>
+      <li><router-link to="/chat" @click="trigger_navbar"> Chat </router-link> </li>
     </ul>
   </nav>
 </template>
+
+<script setup>
+
+const emit = defineEmits(["triggerNavbar"]);
+
+function trigger_navbar() {
+  emit("triggerNavbar");
+  if (document.getElementById("nav").classList.contains("active")) {
+    document.getElementById("nav").classList.remove("active");
+  } else {
+    document.getElementById("nav").classList.add("active");
+  }
+}
+</script>
+
 
 <style scoped>
 nav {
   list-style: none;
   text-align: center;
-  grid-column: 1/3;
 }
 
 ul {
@@ -47,9 +66,43 @@ li a:hover {
   color: aquamarine;
 }
 
-@media screen and (max-device-width: 480px) {
-  li a:hover {
-  background-color: #333;
+.box {
+  display: none;
 }
+
+@media screen and (max-device-width: 480px) {
+  nav {
+    position: absolute;
+    left: -100vw;
+    top: 7vh;
+  }
+  ul {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .box {
+    display: flex;
+    width: 100vw;
+    height: 7vh;
+    background-color: #333;
+    align-items: center;
+  }
+  .box img {
+    width: auto;
+    height: 7vh;
+  } 
+  .luffy {
+    position:absolute;
+    left:0;
+    right:0;
+    margin:0 auto;
+  }
+  nav.active {
+    transition: 350ms;
+    left: 0;
+  }
 }
 </style>
