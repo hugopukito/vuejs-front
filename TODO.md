@@ -1,12 +1,8 @@
 # TODO list
 
 ## design
-logo white beard op top left navbar
 animated zoro
 maybe pi4 logo, with signs this website self-hosted
-
-## nav bar
-responsive
 
 ## topics navbar
 reponsive
