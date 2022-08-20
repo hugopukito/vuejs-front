@@ -1,7 +1,7 @@
 <template>
   <div id ="box" class="box">
     <img @click="trigger_navbar" class="whiteBeard" src="@/assets/white_beard_nobg.png">
-    <div style="margin: 5px"> Menu </div>
+    <div @click="trigger_navbar" style="margin: 5px"> Menu </div>
     <img class="luffy" src="@/assets/luffy.png">
   </div>
   <nav id="nav"> 
@@ -89,6 +89,7 @@ li a:hover {
     height: 7vh;
     background-color: #333;
     align-items: center;
+    margin: 0;
   }
   .box img {
     width: auto;

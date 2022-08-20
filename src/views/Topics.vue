@@ -1,7 +1,11 @@
 <template>
   <div class="grid">
-    <nav>
+    <div id ="box" class="box">
+      <div @click="trigger_navbar" style="margin: 5px"> Find your topic (add search icon) </div>
+    </div>
+    <nav id="vertical_nav">
         <ul>
+          <li class="close" @click="trigger_navbar">X</li>
           <li class="hardware&os"><a href="#hardware&os">Hardware & Os</a></li>
           <li class="ssh"><a href="#ssh">Ssh</a></li>
           <li class="https"><a href="#https">Https</a></li>
@@ -71,6 +75,10 @@
   color:beige;
 }
 
+.box {
+  display: none;
+}
+
 .h1 {
   /* background-color: blueviolet; */
   font-size: 2.2em;
@@ -109,6 +117,10 @@ img {
 a {
   text-decoration: none;
   color:coral;
+}
+
+.close {
+  display: none;
 }
 
 footer {
@@ -153,12 +165,37 @@ nav ul li:hover, nav ul li.active {
   }
   .h1 {
     font-size: 2em;
+    margin-top: 1em;
   }
   section {
     width: 85vw;
   }
+  .box {
+    display: block;
+    justify-content: center;
+    width: 100vw;
+    background: #333;
+    margin-top: 1em;
+    font-size: 1.5em;
+  }
   nav {
-    display: none;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding-top: 1.5em;
+    top: -200vh;
+    background: rgba(15, 19, 21, 0.8);
+  }
+  nav ul li a {
+    color:aquamarine;
+    font-size: 1.5rem;
+  }
+  .close {
+    display: initial;
+  }
+  nav.active {
+    top: 7vh;
   }
   img {
     padding: 0;
@@ -172,6 +209,14 @@ nav ul li:hover, nav ul li.active {
 <script setup>
 
 import { onMounted } from "vue"
+
+function trigger_navbar() {
+  if (document.getElementById("vertical_nav").classList.contains("active")) {
+    document.getElementById("vertical_nav").classList.remove("active");
+  } else {
+    document.getElementById("vertical_nav").classList.add("active");
+  }
+}
 
 onMounted(() => {
   const sections = document.querySelectorAll("section");
