@@ -1,7 +1,8 @@
 <template>
   <div id ="box" class="box">
-    <img @click="trigger_navbar" class="whiteBeard" src="@/assets/white_beard_nobg.png">
-    <div @click="trigger_navbar" style="margin: 5px"> Menu </div>
+    <div @click="trigger_navbar" style="margin-left: 1rem"> 
+      <font-awesome-icon icon="fa-solid fa-bars" size="xl" /> 
+    </div>
     <img class="luffy" src="@/assets/luffy.png">
   </div>
   <nav id="nav"> 

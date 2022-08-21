@@ -14,7 +14,7 @@ function changeRouterView() {
   } else {
     setTimeout(() => {
       document.getElementById("router").classList.add("disable");
-    }, 200);
+    }, 350);
   }
 }
 </script>

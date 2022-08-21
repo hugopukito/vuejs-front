@@ -7,9 +7,6 @@ maybe pi4 logo, with signs this website self-hosted
 ## topics
 add arrow on bottom to get back on top of page
 
-## topics navbar
-reponsive
-
 ## topics items
 mecanical keyboard
 ssh -> remove password ssh

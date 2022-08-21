@@ -1,18 +1,20 @@
 <template>
   <div class="grid">
     <div id ="box" class="box">
-      <div @click="trigger_navbar" style="margin: 5px"> Find your topic (add search icon) </div>
+      <div @click="trigger_navbar" style="margin: 5px"> Find your topic &nbsp;
+        <font-awesome-icon icon="fa-solid fa-magnifying-glass" /> 
+      </div> 
     </div>
     <nav id="vertical_nav">
         <ul>
-          <li class="close" @click="trigger_navbar">X</li>
-          <li class="hardware&os"><a href="#hardware&os">Hardware & Os</a></li>
-          <li class="ssh"><a href="#ssh">Ssh</a></li>
-          <li class="https"><a href="#https">Https</a></li>
-          <li class="nginx"><a href="#nginx">Nginx</a></li>
+          <li class="close_button" @click="trigger_navbar">X</li>
+          <li class="hardware&os" @click="trigger_navbar"><a href="#hardware&os">Hardware & Os</a></li>
+          <li class="ssh" @click="trigger_navbar"><a href="#ssh">Ssh</a></li>
+          <li class="https" @click="trigger_navbar"><a href="#https">Https</a></li>
+          <li class="nginx" @click="trigger_navbar"><a href="#nginx">Nginx</a></li>
         </ul>
     </nav>
-    <div class="main">
+    <div id="main" class="main">
       <div class="h1"> Remake this website </div>
       <section id="hardware&os">
         <div class="h2">Hardware & Os</div>
@@ -69,6 +71,7 @@
 </template>
 
 <style scoped>
+
 .grid {
   display: grid;
   grid-template-columns: min-content;
@@ -137,20 +140,21 @@ nav {
   white-space: nowrap;
   background: #37474F;
   width: 150px;
+  overflow: auto;
 }
 
 nav ul {
+  position: sticky;
   list-style: none;
   margin: 0;
   padding: 0;
-}
-nav ul {
-  position: sticky;
   top: 0;
 }
+
 nav ul li a {
   display: block;
   padding: 0.5rem 1rem;
+  margin: 1rem;
   color: white;
   text-decoration: none;
   font-size: 1.1rem;
@@ -161,20 +165,21 @@ nav ul li:hover, nav ul li.active {
 
 @media screen and (max-device-width: 480px) {
   .grid {
-    display: initial;
+    display: block;
+    margin-top: 3rem;
   }
   .h1 {
     font-size: 2em;
-    margin-top: 1em;
+    margin-top: 1.5em;
   }
   section {
     width: 85vw;
   }
   .box {
     display: block;
-    justify-content: center;
-    width: 100vw;
-    background: #333;
+    margin: auto;
+    width: 60vw;
+    border-style: solid;
     margin-top: 1em;
     font-size: 1.5em;
   }
@@ -186,16 +191,21 @@ nav ul li:hover, nav ul li.active {
     padding-top: 1.5em;
     top: -200vh;
     background: rgba(15, 19, 21, 0.8);
+    backdrop-filter: blur(1rem);
   }
   nav ul li a {
     color:aquamarine;
     font-size: 1.5rem;
   }
-  .close {
+  .close_button {
     display: initial;
   }
   nav.active {
     top: 7vh;
+  }
+  .main.hideOverflow {
+    height: 80vh;
+    overflow: hidden;
   }
   img {
     padding: 0;
@@ -213,8 +223,10 @@ import { onMounted } from "vue"
 function trigger_navbar() {
   if (document.getElementById("vertical_nav").classList.contains("active")) {
     document.getElementById("vertical_nav").classList.remove("active");
+    document.getElementById("main").classList.remove("hideOverflow");
   } else {
     document.getElementById("vertical_nav").classList.add("active");
+    document.getElementById("main").classList.add("hideOverflow");
   }
 }
 
