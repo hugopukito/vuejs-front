@@ -1,10 +1,6 @@
 <template>
   <div class="grid">
-    <div id ="box" class="box">
-      <div @click="trigger_navbar" style="margin: 5px"> Find your topic &nbsp;
-        <font-awesome-icon icon="fa-solid fa-magnifying-glass" /> 
-      </div> 
-    </div>
+    
     <nav id="vertical_nav">
         <ul>
           <li class="close_button" @click="trigger_navbar">X</li>
@@ -16,6 +12,11 @@
     </nav>
     <div id="main" class="main">
       <div class="h1"> Remake this website </div>
+      <div id ="box" class="box">
+        <div @click="trigger_navbar" style="margin: 5px"> Find your topic &nbsp;
+          <font-awesome-icon icon="fa-solid fa-magnifying-glass" /> 
+        </div>
+      </div>
       <section id="hardware&os">
         <div class="h2">Hardware & Os</div>
           <div class="text">
@@ -122,7 +123,7 @@ a {
   color:coral;
 }
 
-.close {
+.close_button {
   display: none;
 }
 
@@ -140,7 +141,6 @@ nav {
   white-space: nowrap;
   background: #37474F;
   width: 150px;
-  overflow: auto;
 }
 
 nav ul {
@@ -154,7 +154,6 @@ nav ul {
 nav ul li a {
   display: block;
   padding: 0.5rem 1rem;
-  margin: 1rem;
   color: white;
   text-decoration: none;
   font-size: 1.1rem;
@@ -162,7 +161,9 @@ nav ul li a {
 nav ul li:hover, nav ul li.active {
   background-color: #111;
 }
+</style>
 
+<style scoped>
 @media screen and (max-device-width: 480px) {
   .grid {
     display: block;
@@ -180,7 +181,8 @@ nav ul li:hover, nav ul li.active {
     margin: auto;
     width: 60vw;
     border-style: solid;
-    margin-top: 1em;
+    margin-top: 3em;
+    margin-bottom: 1.5em;
     font-size: 1.5em;
   }
   nav {
@@ -196,6 +198,7 @@ nav ul li:hover, nav ul li.active {
   nav ul li a {
     color:aquamarine;
     font-size: 1.5rem;
+    margin: 1rem;
   }
   .close_button {
     display: initial;

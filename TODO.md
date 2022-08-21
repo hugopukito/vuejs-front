@@ -1,5 +1,12 @@
 # TODO list
 
+## navbar
+blur back-ground
+
+## navbar topics
+add active animation on button
+add search bar component
+
 ## design
 animated zoro
 maybe pi4 logo, with signs this website self-hosted
