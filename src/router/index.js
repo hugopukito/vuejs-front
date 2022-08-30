@@ -4,6 +4,7 @@ import Topics from "@/views/Topics.vue"
 import Monitoring from "@/views/Monitoring.vue"
 import Chat from "@/views/Chat.vue"
 import NotFound from "@/views/NotFound.vue"
+import Keyboard from "@/views/Keyboard.vue"
 
 const routes = [
     {
@@ -20,6 +21,14 @@ const routes = [
         component: Topics,
         meta: {
             title: "topics"
+        }
+    },
+    {
+        name: "Keyboard",
+        path: "/keyboard",
+        component: Keyboard,
+        meta: {
+            title: "keyboard"
         }
     },
     {

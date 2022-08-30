@@ -1,14 +1,10 @@
 <template>
-    <h1> Monitoring </h1>
+    <div class="h1">
+        Monitoring
+    </div>
     <Panel/>
 </template>
 
 <script setup>
 import Panel from "@/components/Panel.vue"
 </script>
-
-<style scoped>
-h1 {
-    color: orange;
-}
-</style>

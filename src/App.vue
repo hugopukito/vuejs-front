@@ -27,6 +27,22 @@ function changeRouterView() {
   text-align: center;
   color: beige;
 }
+.h1 {
+  font-size: 2.2em;
+  margin-top: 1.5em;
+  margin-bottom: 1.7em;
+  color:orange;
+}
+.h2 {
+  font-size: 1.9em;
+  margin-bottom: 1.5em;
+  color:aquamarine;
+}
+.h3 {
+  font-size: 1.5em;
+  margin-bottom: 1.5em;
+  color:coral;
+}
 @media screen and (max-device-width: 480px) {
   .router.disable {
     display: none;

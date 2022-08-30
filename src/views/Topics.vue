@@ -1,13 +1,14 @@
 <template>
   <div class="grid">
-    
     <nav id="vertical_nav">
         <ul>
           <li class="close_button" @click="trigger_navbar">X</li>
-          <li class="hardware&os" @click="trigger_navbar"><a href="#hardware&os">Hardware & Os</a></li>
-          <li class="ssh" @click="trigger_navbar"><a href="#ssh">Ssh</a></li>
-          <li class="https" @click="trigger_navbar"><a href="#https">Https</a></li>
-          <li class="nginx" @click="trigger_navbar"><a href="#nginx">Nginx</a></li>
+          <li class="hardware&os" @click="trigger_navbar"><a href="#hardware&os">Hardware & OS</a></li>
+          <li class="ssh" @click="trigger_navbar"><a href="#ssh">SSH</a></li>
+          <li class="port_forwarding" @click="trigger_navbar"><a href="#port_forwarding">Port forwarding</a></li>
+          <li class="nginx&https" @click="trigger_navbar"><a href="#nginx&https">NGINX & HTTPS</a></li>
+          <li class="monitoring" @click="trigger_navbar"><a href="#monitoring">Monitoring</a></li>
+          <li class="chat" @click="trigger_navbar"><a href="#chat">Chat</a></li>
         </ul>
     </nav>
     <div id="main" class="main">
@@ -18,7 +19,7 @@
         </div>
       </div>
       <section id="hardware&os">
-        <div class="h2">Hardware & Os</div>
+        <div class="h2">Hardware & OS</div>
           <div class="text">
             This website is running on a Pi4 with 4GB of ram, I only plugged it and install raspbian os (default). <br> <br>
 
@@ -43,27 +44,43 @@
           </div>
       </section>
       <section id="ssh">
-        <div class="h2">Ssh</div>
+        <div class="h2">SSH</div>
         <div class="text">
           <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
         </div>
       </section>
-      <section id="https">
-        <div class="h2">Https</div>
+      <section id="port_forwarding">
+        <div class="h2">Port forwarding</div>
         <div class="text">
           <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
         </div>
       </section>
-      <section id="nginx">
-        <div class="h2">Nginx</div>
+      <section id="nginx&https">
+        <div class="h2">NGINX & HTTPS</div>
         <div class="text">
           <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
-          <span>&#9888;</span> <br><br><br><br><br><br>
-          <span>&#9888;</span> <br><br><br><br><br><br>
-          <span>&#9888;</span> <br><br><br><br><br><br>
-          <span>&#9888;</span> <br><br><br><br><br><br>
-          <span>&#9888;</span> <br><br><br><br><br><br>
-          <span>&#9888;</span> <br><br><br><br><br><br>
+        </div>
+      </section>
+      <section id="monitoring">
+        <div class="h2">Monitoring</div>
+        <div class="h3">Grafana</div>
+        <div class="text">
+          <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
+        </div>
+        <div class="h3">Telegraf</div>
+        <div class="text">
+          <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
+        </div>
+      </section>
+      <section id="chat">
+        <div class="h2">Chat</div>
+        <div class="h3">Back-end</div>
+        <div class="text">
+          <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
+        </div>
+        <div class="h3">Front-end</div>
+        <div class="text">
+          <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
         </div>
       </section>
     </div>
@@ -81,21 +98,6 @@
 
 .box {
   display: none;
-}
-
-.h1 {
-  /* background-color: blueviolet; */
-  font-size: 2.2em;
-  margin-top: 1.5em;
-  margin-bottom: 1.7em;
-  color: orange;
-}
-
-.h2 {
-  /* background-color:darkgreen; */
-  font-size: 1.8em;
-  margin-bottom: 1.5em;
-  color:aquamarine;
 }
 
 section {
@@ -140,7 +142,7 @@ footer {
 nav {
   white-space: nowrap;
   background: #37474F;
-  width: 150px;
+  width: 9.5vw;
 }
 
 nav ul {

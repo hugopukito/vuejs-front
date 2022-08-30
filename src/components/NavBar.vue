@@ -9,6 +9,7 @@
     <ul>
       <li><router-link to="/" @click="trigger_navbar"> Home </router-link> </li>
       <li><router-link to="/topics" @click="trigger_navbar"> Topics </router-link> </li>
+      <li><router-link to="/keyboard" @click="trigger_navbar"> Keyboard </router-link> </li>
       <li><router-link to="/monitoring" @click="trigger_navbar"> Monitoring </router-link> </li>
       <li><router-link to="/chat" @click="trigger_navbar"> Chat </router-link> </li>
     </ul>
