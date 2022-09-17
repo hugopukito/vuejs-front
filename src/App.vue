@@ -43,6 +43,10 @@ function changeRouterView() {
   margin-bottom: 1.5em;
   color:coral;
 }
+a {
+  text-decoration: none;
+  color:coral;
+}
 @media screen and (max-device-width: 480px) {
   .router.disable {
     display: none;

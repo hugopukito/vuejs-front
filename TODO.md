@@ -1,5 +1,11 @@
 # TODO list
 
+## fr / en
+add button to switch language
+
+## class
+use vue class changer instead of getElementById
+
 ## design
 animated zoro
 maybe pi4 logo, with signs this website self-hosted
