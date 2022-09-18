@@ -26,17 +26,17 @@
             To install rapsbian on your SD card, download <a href="https://www.raspberrypi.com/software/" target="_blank"> 
             pi imager </a>, select the os you want (raspbian working well) and your SD card. <br> <br>
 
-            <img src="@/assets/pi_imager.png"> <br> <br>
+            <img src="@/assets/topics/pi_imager.png"> <br> <br>
 
             Next you will need to activate ssh in settings and set your credentials. <br> <br>
 
-            <img src="@/assets/pi_imager_settings.png"> <br> <br>
+            <img src="@/assets/topics/pi_imager_settings.png"> <br> <br>
 
             Now you can plug the SD card in your Pi4 and power it by pluggin the power cable.<br>
             Plugged the hdmi cable to a screen, your keyboard and your mouse and you're good to go. <br> <br>
 
-            <span>&#9888;</span> If you've got message error "unable to read partition as fat",
-              just destroy your SD card and buy another one. <span>&#9888;</span> <br> <br>
+            &#9888; If you've got message error "unable to read partition as fat",
+              just destroy your SD card and buy another one. &#9888; <br> <br>
 
             Os should be installed on your Pi4, go on the top of your screen and select your wifi, now
             you can unplugged everything, your Pi4 is ready for dev !
@@ -46,41 +46,41 @@
       <section id="ssh">
         <div class="h2">SSH</div>
         <div class="text">
-          <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
+          &#9888; In progress... &#9888; <br><br><br>
         </div>
       </section>
       <section id="port_forwarding">
         <div class="h2">Port forwarding</div>
         <div class="text">
-          <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
+          &#9888; In progress... &#9888; <br><br><br>
         </div>
       </section>
       <section id="nginx&https">
         <div class="h2">NGINX & HTTPS</div>
         <div class="text">
-          <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
+          &#9888; In progress... &#9888; <br><br><br>
         </div>
       </section>
       <section id="monitoring">
         <div class="h2">Monitoring</div>
         <div class="h3">Grafana</div>
         <div class="text">
-          <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
+          &#9888; In progress... &#9888; <br><br><br>
         </div>
         <div class="h3">Telegraf</div>
         <div class="text">
-          <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
+          &#9888; In progress... &#9888; <br><br><br>
         </div>
       </section>
       <section id="chat">
         <div class="h2">Chat</div>
         <div class="h3">Back-end</div>
         <div class="text">
-          <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
+          &#9888; In progress... &#9888; <br><br><br>
         </div>
         <div class="h3">Front-end</div>
         <div class="text">
-          <span>&#9888;</span> In progress... <span>&#9888;</span> <br><br><br>
+          &#9888; In progress... &#9888; <br><br><br>
         </div>
       </section>
     </div>

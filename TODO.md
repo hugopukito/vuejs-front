@@ -3,9 +3,6 @@
 ## images
 fix loading issue
 
-## keyboard
-add content
-
 ## class
 use vue class changer instead of getElementById
 
