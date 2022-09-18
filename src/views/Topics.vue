@@ -137,7 +137,7 @@ footer {
 nav {
   white-space: nowrap;
   background: #37474F;
-  width: 9.5vw;
+  width: 11vw;
 }
 
 nav ul {
@@ -157,6 +157,14 @@ nav ul li a {
 }
 nav ul li:hover, nav ul li.active {
   background-color: #111;
+}
+</style>
+
+<style scoped>
+@media screen and (max-device-width: 1300px) {
+  nav {
+    width: 160px;
+  }
 }
 </style>
 
