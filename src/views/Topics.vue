@@ -84,7 +84,7 @@
         </div>
       </section>
     </div>
-    <footer>&copy; pukito</footer>
+    <footer></footer>
   </div>
 </template>
 
@@ -125,12 +125,6 @@ img {
 }
 
 footer {
-  background-color:#333;
-  color:beige;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   grid-column: 1 / 3;
 }
 

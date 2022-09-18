@@ -1,10 +1,16 @@
 # TODO list
 
-## fr / en
-add button to switch language
+## images
+fix loading issue
+
+## keyboard
+add content
 
 ## class
 use vue class changer instead of getElementById
+
+## fr / en
+add button to switch language
 
 ## design
 animated zoro
@@ -19,9 +25,6 @@ port forw  -> port 80 443 22
 nginx      -> https (certbot) with http
 monitoring -> grafana live + telegraf websocket vs http (monitoring)
 chat       -> golang (back) & vuejs (front)
-
-## keyboard
-add content
 
 ## fix
 navbar -> two times @click trigger. 
