@@ -72,7 +72,7 @@ li a:hover {
   display: none;
 }
 
-@media screen and (max-device-width: 480px) {
+@media screen and (max-device-width: 500px) {
   nav {
     position: absolute;
     left: -100vw;

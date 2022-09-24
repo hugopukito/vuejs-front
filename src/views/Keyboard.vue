@@ -3,7 +3,7 @@
     Custom Keyboard ⌨️
   </div>
   <div class="resume">
-    Learn how to build a custom Keyboard from scratch
+    Learn how to build a 65% ISO-FR keyboard from scratch
   </div>
   <img src="@/assets/keyboard/keyboard.png">
   <div class="h3">
@@ -199,7 +199,6 @@ custom-mechanical-keyboard-black-siver-grey-red-blue-colorway-for-xd68-65" targe
 
 img {
   margin-bottom: 3em;
-  margin-right: 1em;
   width: 500px;
   height: auto;
   box-shadow: 0px 0px 30px 3px rgba(212, 215, 135, 0.2);
