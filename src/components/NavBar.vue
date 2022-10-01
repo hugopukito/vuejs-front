@@ -12,6 +12,8 @@
       <li><router-link to="/keyboard" @click="trigger_navbar"> Keyboard </router-link> </li>
       <li><router-link to="/monitoring" @click="trigger_navbar"> Monitoring </router-link> </li>
       <li><router-link to="/chat" @click="trigger_navbar"> Chat </router-link> </li>
+      <li class="auth"> <button> Sign in </button> </li>
+      <li class="auth"> <button> Sign up </button></li>
     </ul>
   </nav>
 </template>
@@ -30,11 +32,14 @@ function trigger_navbar() {
 }
 </script>
 
-
 <style scoped>
 nav {
   list-style: none;
   text-align: center;
+}
+
+.auth {
+  float: right;
 }
 
 ul {
@@ -47,6 +52,7 @@ ul {
 }
 
 li {
+  float: left;
   display: inline;
 }
 

@@ -4,7 +4,7 @@
   <div class="msgs" v-else>
     <div class="msg" v-for="(item, index) in msg" :key="index">
         <div class="element">
-            <div class="nom"> {{ msg[msg.length-1-index].nom }} </div>
+            <div class="name"> {{ msg[msg.length-1-index].name }} </div>
         </div>
         <div class="element">
             <div class="message"> {{ msg[msg.length-1-index].message }} </div>
@@ -28,7 +28,7 @@ onMounted(() => {
 })
 
 async function getMsg () {
-    await axios.get("https://hugopukito.com/api")
+    await axios.get(process.env.VUE_APP_API_URL + "/messages")
     .then(resp => {
         msg.value = resp.data
         isLoading.value = false
@@ -38,23 +38,22 @@ async function getMsg () {
 function refresh() {
     setInterval(function() {
         getMsgRefresh()
-    }, 1000)
+    }, 10000)
 }
 
 async function getMsgRefresh () {
-    await axios.get("https://hugopukito.com/api")
+    await axios.get(process.env.VUE_APP_API_URL + "/messages")
     .then(resp => {
         msg.value = resp.data
     })
 }
 
-function createMsg(nom, message) {
+function createMsg(message) {
     const obj = {
-        "nom": nom.value,
         "message": message.value
     };
     isLoading.value = true
-    axios.post("https://hugopukito.com/api/post", JSON.stringify(obj))
+    axios.post(process.env.VUE_APP_API_URL + "/messages", JSON.stringify(obj))
     .then(getMsg())
 }
 </script>
@@ -75,7 +74,7 @@ h1 {
     display: inline-block;
     margin: 10px;
 }
-.nom{
+.name{
     color: aquamarine;
 }
 .message{
