@@ -5,6 +5,8 @@ import Monitoring from "@/views/Monitoring.vue"
 import Chat from "@/views/Chat.vue"
 import NotFound from "@/views/NotFound.vue"
 import Keyboard from "@/views/Keyboard.vue"
+import Signup from "@/views/Signup.vue"
+import Signin from "@/views/Signin.vue"
 
 const routes = [
     {
@@ -45,6 +47,22 @@ const routes = [
         component: Chat,
         meta: {
             title: "chat"
+        }
+    },
+    {
+        name: "Signup",
+        path: "/signup",
+        component: Signup,
+        meta: {
+            title: "signup"
+        }
+    },
+    {
+        name: "Signint",
+        path: "/signin",
+        component: Signin,
+        meta: {
+            title: "signin"
         }
     },
     {

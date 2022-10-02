@@ -12,8 +12,10 @@
       <li><router-link to="/keyboard" @click="trigger_navbar"> Keyboard </router-link> </li>
       <li><router-link to="/monitoring" @click="trigger_navbar"> Monitoring </router-link> </li>
       <li><router-link to="/chat" @click="trigger_navbar"> Chat </router-link> </li>
-      <li class="auth"> <button> Sign in </button> </li>
-      <li class="auth"> <button> Sign up </button></li>
+      <li class="auth"><router-link to="/signup"> 
+        Sign up </router-link> </li>
+      <li class="auth"><router-link to="/signin"> 
+        Sign in </router-link> </li>
     </ul>
   </nav>
 </template>

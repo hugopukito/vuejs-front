@@ -1,5 +1,5 @@
 <template>
-  <div class="form__group field">
+  <div>
     <input @keyup.enter="submit" v-model="message" placeholder="Message" />
     <button @click="submit">Envoyer</button>
   </div>

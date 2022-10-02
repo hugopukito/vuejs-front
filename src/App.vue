@@ -3,17 +3,10 @@
   <div id="router" class="router">
     <router-view/>
   </div>
-  <Modal v-model:visible="isVisible">
-    <div>your content...</div>
-  </Modal>
 </template>
 
 <script setup>
 import NavBar from "@/components/NavBar.vue"
-import { ref } from "vue"
-import { Modal } from "usemodal-vue3"
-
-let isVisible = ref(false);
 
 function changeRouterView() {
   if (document.getElementById("router").classList.contains("disable")) {
