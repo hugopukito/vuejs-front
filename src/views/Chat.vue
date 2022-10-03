@@ -23,8 +23,8 @@ let isLoading = ref(true)
 let msg = ref(String)
 
 onMounted(() => {
-    getMsg(),
-    refresh()
+    getMsg()
+    /* refresh() */
 })
 
 async function getMsg () {
