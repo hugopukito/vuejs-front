@@ -20,6 +20,7 @@ async function submit() {
     await axios.post(process.env.VUE_APP_API_URL + "/signin", JSON.stringify(obj))
     .then(resp => {
         localStorage.setItem("token", resp.data.token);
+        console.log("token saved");
     })
 }
 
@@ -30,8 +31,7 @@ function test() {
     axios.post(process.env.VUE_APP_API_URL + "/test", JSON.stringify(obj)
     ,{
         headers: {
-            Authorization: 'Bearer ' + localStorage.getItem("token"),
-            "Access-Control-Allow-Headers": "*"
+            Authorization: 'Bearer ' + localStorage.getItem("token")
         }
     }
     )
