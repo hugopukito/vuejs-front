@@ -23,8 +23,8 @@ let isLoading = ref(true)
 let msg = ref(String)
 
 onMounted(() => {
-    getMsg()
-    /* refresh() */
+    getMsg(),
+    refresh()
 })
 
 async function getMsg () {
@@ -48,13 +48,18 @@ async function getMsgRefresh () {
     })
 }
 
-function createMsg(message) {
+async function createMsg(message) {
     const obj = {
         "message": message.value
     };
-    isLoading.value = true
-    axios.post(process.env.VUE_APP_API_URL + "/messages", JSON.stringify(obj))
-    .then(getMsg())
+    await axios.post(process.env.VUE_APP_API_URL + "/messages", JSON.stringify(obj), {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+        }
+    }).then(resp => {
+        getMsg();
+        console.log(resp.status)
+    })
 }
 </script>
 
