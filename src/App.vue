@@ -1,5 +1,5 @@
 <template>
-  <nav-bar @trigger-navbar="changeRouterView"/>
+  <NavBar @trigger-navbar="changeRouterView()"/>
   <div id="router" class="router">
     <router-view/>
   </div>

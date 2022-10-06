@@ -1,6 +1,6 @@
 <template>
     <input @keyup.enter="submit" v-model="email" placeholder="email"/> <br>
-    <input @keyup.enter="submit" v-model="password" placeholder="password"/> <br>
+    <input @keyup.enter="submit" v-model="password" type="password" placeholder="password"/> <br>
     <button @click="submit">Envoyer</button>
 </template>
   

@@ -1,28 +1,38 @@
 <template>
   <div id ="box" class="box">
-    <div @click="trigger_navbar" style="margin-left: 1rem"> 
+    <div @click="trigger_navbar()" style="margin-left: 1rem"> 
       <font-awesome-icon icon="fa-solid fa-bars" size="xl" /> 
     </div>
     <img class="luffy" src="@/assets/luffy.png">
   </div>
   <nav id="nav"> 
     <ul>
-      <li><router-link to="/" @click="trigger_navbar"> Home </router-link> </li>
-      <li><router-link to="/topics" @click="trigger_navbar"> Topics </router-link> </li>
-      <li><router-link to="/keyboard" @click="trigger_navbar"> Keyboard </router-link> </li>
-      <li><router-link to="/monitoring" @click="trigger_navbar"> Monitoring </router-link> </li>
-      <li><router-link to="/chat" @click="trigger_navbar"> Chat </router-link> </li>
-      <li class="auth"><router-link to="/signup"> 
-        Sign up </router-link> </li>
-      <li class="auth"><router-link to="/signin"> 
-        Sign in </router-link> </li>
+      <li><router-link to="/" @click="trigger_navbar()"> Home </router-link> </li>
+      <li><router-link to="/topics" @click="trigger_navbar()"> Topics </router-link> </li>
+      <li><router-link to="/keyboard" @click="trigger_navbar()"> Keyboard </router-link> </li>
+      <li><router-link to="/monitoring" @click="trigger_navbar()"> Monitoring </router-link> </li>
+      <li><router-link to="/chat" @click="trigger_navbar()"> Chat </router-link> </li>
+      <li class="auth"> <a @click="trigger_navbar(); openModal()"> Sign up </a> </li>
+      <li class="auth"> <a @click="trigger_navbar()"> Sign in </a> </li>
     </ul>
   </nav>
+  <MyModal @modal-boolean="closeModal()" :isModalOpen="isModalOpen"/>
 </template>
 
 <script setup>
+import { ref } from "vue"
+import MyModal from "./MyModal.vue"
 
 const emit = defineEmits(["triggerNavbar"]);
+const isModalOpen = ref(false);
+
+function openModal() {
+  isModalOpen.value = true;
+}
+
+function closeModal() {
+  isModalOpen.value = false;
+}
 
 function trigger_navbar() {
   emit("triggerNavbar");
@@ -42,6 +52,7 @@ nav {
 
 .auth {
   float: right;
+  cursor: pointer;
 }
 
 ul {
