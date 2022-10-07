@@ -32,7 +32,10 @@ let name = ref("")
 let email = ref("")
 let password = ref("")
 
-onClickOutside(modal, () => emit("modalBoolean"));
+onClickOutside(modal, () => {
+  emit("modalBoolean");
+  created.value = false;
+});
 
 let created = ref(false)
 
@@ -46,6 +49,9 @@ async function submit() {
     .then(resp => {
       if (resp.status == 201) {
         created.value = true;
+        name.value = "";
+        email.value = "";
+        password.value = "";
       }
     })
 }

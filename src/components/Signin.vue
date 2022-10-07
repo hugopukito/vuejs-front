@@ -7,7 +7,7 @@
             <input @keyup.enter="submit" v-model="email" placeholder="email"/> <br>
             <input @keyup.enter="submit" v-model="password" type="password" placeholder="password"/> <br>
             <button @click="submit">Login</button>
-            <div v-if="isLogin">connected !</div>
+            <div v-if="connected">connected !</div>
           </div>
         </div>
       </Transition>
@@ -26,13 +26,15 @@ defineProps({
 const emit = defineEmits(["modalBoolean"]);
 
 const modal = ref(null);
+let connected = ref(false);
 
-let email = ref("")
-let password = ref("")
+let email = ref("");
+let password = ref("");
 
-onClickOutside(modal, () => emit("modalBoolean"));
-
-let isLogin = ref(false)
+onClickOutside(modal, () => {
+  emit("modalBoolean");
+  connected.value = false;
+});
 
 async function submit() {
   const obj = {
@@ -43,7 +45,8 @@ async function submit() {
   .then(resp => {
       localStorage.setItem("token", resp.data.token);
       axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token")
-      isLogin.value = true;
+      connected.value = true;
+      password.value = "";
   })
 }
 </script>

@@ -56,10 +56,7 @@ async function createMsg(message) {
         headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
         }
-    }).then(resp => {
-        getMsg();
-        console.log(resp.status)
-    })
+    }).then(getMsg())
 }
 </script>
 
