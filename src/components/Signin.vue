@@ -43,10 +43,15 @@ async function submit() {
   };
   await axios.post(process.env.VUE_APP_API_URL + "/signin", JSON.stringify(obj))
   .then(resp => {
-      localStorage.setItem("token", resp.data.token);
-      axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token")
-      connected.value = true;
-      password.value = "";
+      if (resp.status == 200) {
+        localStorage.setItem("token", resp.data.token);
+        axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token")
+        connected.value = true;
+        password.value = "";
+        console.log("connected");
+      } else {
+        console.log("problem signin");
+      }
   })
 }
 </script>

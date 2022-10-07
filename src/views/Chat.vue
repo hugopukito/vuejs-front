@@ -41,7 +41,7 @@ function refresh() {
     }, 10000)
 }
 
-async function getMsgRefresh () {
+async function getMsgRefresh() {
     await axios.get(process.env.VUE_APP_API_URL + "/messages")
     .then(resp => {
         msg.value = resp.data
@@ -56,7 +56,7 @@ async function createMsg(message) {
         headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
         }
-    }).then(getMsg())
+    }).then(getMsgRefresh())
 }
 </script>
 
