@@ -12,26 +12,37 @@
       <li><router-link to="/keyboard" @click="trigger_navbar()"> Keyboard </router-link> </li>
       <li><router-link to="/monitoring" @click="trigger_navbar()"> Monitoring </router-link> </li>
       <li><router-link to="/chat" @click="trigger_navbar()"> Chat </router-link> </li>
-      <li class="auth"> <a @click="trigger_navbar(); openModal()"> Sign up </a> </li>
-      <li class="auth"> <a @click="trigger_navbar()"> Sign in </a> </li>
+      <li class="auth"> <a @click="trigger_navbar(); openSignup()"> Sign up </a> </li>
+      <li class="auth"> <a @click="trigger_navbar(); openSignin()"> Sign in </a> </li>
     </ul>
   </nav>
-  <MyModal @modal-boolean="closeModal()" :isModalOpen="isModalOpen"/>
+  <Signup @modal-boolean="closeSignup()" :isModalOpen="isSignupOpen"/>
+  <Signin @modal-boolean="closeSignin()" :isModalOpen="isSigninOpen"/>
 </template>
 
 <script setup>
-import { ref } from "vue"
-import MyModal from "./MyModal.vue"
+import { ref } from "vue";
+import Signup from "./Signup.vue";
+import Signin from "./Signin.vue";
 
 const emit = defineEmits(["triggerNavbar"]);
-const isModalOpen = ref(false);
+const isSignupOpen = ref(false);
+const isSigninOpen = ref(false);
 
-function openModal() {
-  isModalOpen.value = true;
+function openSignup() {
+  isSignupOpen.value = true;
 }
 
-function closeModal() {
-  isModalOpen.value = false;
+function closeSignup() {
+  isSignupOpen.value = false;
+}
+
+function openSignin() {
+  isSigninOpen.value = true;
+}
+
+function closeSignin() {
+  isSigninOpen.value = false;
 }
 
 function trigger_navbar() {
