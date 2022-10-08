@@ -1,12 +1,22 @@
 <template>
-  <NavBar @trigger-navbar="changeRouterView()"/>
+  <NavBar @trigger-navbar="changeRouterView()" @re-render="reRender()"/>
   <div id="router" class="router">
-    <router-view/>
+    <router-view v-if="render"/>
   </div>
 </template>
 
 <script setup>
 import NavBar from "@/components/NavBar.vue"
+import { ref } from "vue";
+
+let render = ref(true);
+
+function reRender(){
+  render.value = false;
+  render.value = true;
+  console.log("test");
+  // re render not working, chat bug
+}
 
 function changeRouterView() {
   if (document.getElementById("router").classList.contains("disable")) {

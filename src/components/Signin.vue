@@ -75,6 +75,7 @@ async function submit() {
         inConnection.value = false;
         connected.value = true;
         localStorage.setItem("token", resp.data.token);
+        localStorage.setItem("userName", resp.data.name);
         axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token")
         connected.value = true;
         password.value = "";

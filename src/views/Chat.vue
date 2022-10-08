@@ -1,7 +1,12 @@
 <template>
-  <Input @submit="createMsg" />
-  <div v-if = isLoading><h1>loading...</h1></div>
-  <div class="msgs" v-else>
+    <div v-if="userName === null">
+        <h3> Create an account and Login to put your message ! </h3>
+    </div>
+    <div v-else>
+        <Input @submit="createMsg" />
+    </div>
+    <div v-if = isLoading><h1>loading...</h1></div>
+    <div class="msgs" v-else>
     <div class="msg" v-for="(item, index) in msg" :key="index">
         <div class="element">
             <div class="name"> {{ msg[msg.length-1-index].name }} </div>
@@ -10,21 +15,23 @@
             <div class="message"> {{ msg[msg.length-1-index].message }} </div>
         </div>
     </div>
-  </div>
+    </div>
 </template>
 
 <script setup>
 
-import { ref, onMounted } from "vue"
+import { ref, onMounted, inject } from "vue"
 import axios from "axios"
 import Input from "@/components/Input.vue"
 
-let isLoading = ref(true)
-let msg = ref(String)
+let isLoading = ref(true);
+let msg = ref(String);
+let userName = ref("");
 
 onMounted(() => {
-    getMsg(),
-    refresh()
+    getMsg();
+    refresh();
+    userName.value = localStorage.getItem("userName");
 })
 
 async function getMsg () {

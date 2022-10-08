@@ -12,24 +12,47 @@
       <li><router-link to="/keyboard" @click="trigger_navbar()"> Keyboard </router-link> </li>
       <li><router-link to="/monitoring" @click="trigger_navbar()"> Monitoring </router-link> </li>
       <li><router-link to="/chat" @click="trigger_navbar()"> Chat </router-link> </li>
-      <div class="auth">
+      <div class="auth" v-if="userName === null">
         <li> <a @click="trigger_navbar(); openSignup()"> Sign up </a> </li>
         <li> <a @click="trigger_navbar(); openSignin()"> Sign in </a> </li>
       </div>
+      <div class="auth" v-else>
+        <li> <a> {{ userName }} </a> </li>
+        <li> <a @click="logout()"> Sign out </a> </li>
+      </div>
     </ul>
   </nav>
-  <Signup @modal-boolean="closeSignup()" @signup-worked="closeSignup(); openSignin()" :isModalOpen="isSignupOpen"/>
-  <Signin @modal-boolean="closeSignin()" @signin-worked="closeSignin()" :isModalOpen="isSigninOpen"/>
+  <div>
+    <Signup @modal-boolean="closeSignup()" @signup-worked="closeSignup(); openSignin()" :isModalOpen="isSignupOpen"/>
+    <Signin @modal-boolean="closeSignin()" @signin-worked="closeSignin(); signin()" :isModalOpen="isSigninOpen"/>
+  </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref, inject, provide } from "vue";
 import Signup from "./Signup.vue";
 import Signin from "./Signin.vue";
 
-const emit = defineEmits(["triggerNavbar"]);
+const emit = defineEmits(["triggerNavbar", "reRender"]);
 const isSignupOpen = ref(false);
 const isSigninOpen = ref(false);
+let userName = ref(null);
+
+onMounted(() => {
+  userName.value = localStorage.getItem("userName");
+})
+
+function signin(){
+  userName.value = localStorage.getItem("userName");
+  emit("reRender");
+}
+
+function logout() {
+  localStorage.removeItem("userName");
+  localStorage.removeItem("token");
+  userName.value = null;
+  emit("reRender");
+}
 
 function openSignup() {
   isSignupOpen.value = true;
