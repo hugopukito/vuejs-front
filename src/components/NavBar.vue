@@ -12,12 +12,14 @@
       <li><router-link to="/keyboard" @click="trigger_navbar()"> Keyboard </router-link> </li>
       <li><router-link to="/monitoring" @click="trigger_navbar()"> Monitoring </router-link> </li>
       <li><router-link to="/chat" @click="trigger_navbar()"> Chat </router-link> </li>
-      <li class="auth"> <a @click="trigger_navbar(); openSignup()"> Sign up </a> </li>
-      <li class="auth"> <a @click="trigger_navbar(); openSignin()"> Sign in </a> </li>
+      <div class="auth">
+        <li> <a @click="trigger_navbar(); openSignup()"> Sign up </a> </li>
+        <li> <a @click="trigger_navbar(); openSignin()"> Sign in </a> </li>
+      </div>
     </ul>
   </nav>
-  <Signup @modal-boolean="closeSignup()" :isModalOpen="isSignupOpen"/>
-  <Signin @modal-boolean="closeSignin()" :isModalOpen="isSigninOpen"/>
+  <Signup @modal-boolean="closeSignup()" @signup-worked="closeSignup(); openSignin()" :isModalOpen="isSignupOpen"/>
+  <Signin @modal-boolean="closeSignin()" @signin-worked="closeSignin()" :isModalOpen="isSigninOpen"/>
 </template>
 
 <script setup>
@@ -101,7 +103,9 @@ li a:hover {
 .box {
   display: none;
 }
+</style>
 
+<style scoped>
 @media screen and (max-device-width: 500px) {
   nav {
     position: absolute;
@@ -115,6 +119,12 @@ li a:hover {
     display: flex;
     flex-direction: column;
   }
+  .auth {
+    margin-top: auto;
+    margin-bottom: 200px;
+    display: flex;
+    flex-direction: column;
+  } 
   .box {
     display: flex;
     width: 100vw;
