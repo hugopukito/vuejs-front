@@ -39,14 +39,14 @@ const routes = [
             title: "monitoring"
         }
     },
-    {
-        name: "Chat",
-        path: "/chat",
-        component: Chat,
-        meta: {
-            title: "chat"
-        }
-    },
+    // {
+    //     name: "Chat",
+    //     path: "/chat",
+    //     component: Chat,
+    //     meta: {
+    //         title: "chat"
+    //     }
+    // },
     {
         name: "NotFound",
         path: "/:pathMatch(.*)",
