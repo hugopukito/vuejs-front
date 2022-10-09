@@ -31,7 +31,6 @@ let userName = ref("");
 onMounted(() => {
     getMsg();
     refresh();
-    userName.value = localStorage.getItem("userName");
 })
 
 async function getMsg () {
