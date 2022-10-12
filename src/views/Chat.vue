@@ -4,7 +4,9 @@
         <input type="submit" value="Send" @click="sendMessage">
     </form>
     <h3>websocket messages</h3>
-    <p>{{ rcvMessage }}</p>
+    <div v-for="(item, index) in rcvMessage" :key="index">
+        {{ rcvMessage[rcvMessage.length-1-index] }}
+    </div>
 </template>
 
 <script setup>
@@ -12,12 +14,12 @@ import { ref, onMounted } from "vue";
 
 let message = ref("")
 let socket = ref(null)
-let rcvMessage = ref("")
+let rcvMessage = ref([""])
 
 onMounted(() => {
     socket = new WebSocket("ws://localhost:8080/socket")
     socket.onmessage = (msg) => {
-        rcvMessage.value = msg.data
+        rcvMessage.value.push(msg.data)
     }
 })
 
