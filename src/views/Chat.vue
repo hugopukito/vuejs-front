@@ -1,14 +1,16 @@
 <template>
     <div class="chat">
         <div class="h3">Websocket chat</div>
-        <div v-if="!isLoading" class="messages" id="messages">
+        <div class="messages" id="messages">
+          <div v-if="!isLoading">
             <div v-for="(msg, index) in msgs" :key="index">
                 <div style="color: aquamarine;">{{ msg.name }}</div>
                 <div style="color: orange;">{{ msg.message }}</div>
                 <br>
             </div>
         </div>
-        <div v-else class="spinner"><Spinner/></div>
+        <div v-else class="spinner"><Spinner/></div>  
+        </div>
         <div v-if="noMessages">
             <div style="color: yellow;"> Be the first to send a message !</div>
         </div>
