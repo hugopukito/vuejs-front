@@ -12,6 +12,9 @@
         </div>
     </div>
     <div v-else>loading...</div>
+    <div v-if="noMessages">
+        <div style="color: yellow;"> Be the first to send a message !</div>
+    </div>
 </template>
 
 <script setup>
@@ -20,20 +23,27 @@ import { ref, onMounted } from "vue";
 let message = ref("")
 let socket = ref(null)
 let msgs = []
+let noMessages = ref(false)
 let isLoading = ref(true)
 
 onMounted(() => {
     socket = new WebSocket("ws://localhost:8080/websocket")
     socket.onmessage = (msg) => {
         isLoading.value = true
-        msgs.push(JSON.parse(msg.data))
+        if (!(JSON.parse(msg.data).name == "")) {
+            noMessages.value = false
+            msgs.push(JSON.parse(msg.data))
+            isLoading.value = false
+        } else {
+            noMessages.value = true
+        }
         isLoading.value = false
     }
 })
 
 function sendMessage() {
     let msg = {
-        "name": "golang :)",
+        "name": "Go user :)",
         "message": message.value
     }
     socket.send(JSON.stringify(msg))
