@@ -1,25 +1,30 @@
 <template>
-    <form :action="sendMessage" @click.prevent="onSubmit">
-        <input v-model="message" type="text">
-        <input type="submit" value="Send" @click="sendMessage">
-    </form>
-    <div class="h3">Websocket chat</div>
-    <div v-if="!isLoading">
-        <div v-for="(_, index) in msgs" :key="index">
-            <div style="color: aquamarine;">{{ msgs[msgs.length-1-index].name }}</div>
-            <div style="color: orange;">{{ msgs[msgs.length-1-index].message }}</div>
-            <br>
+    <div class="chat">
+        <div class="h3">Websocket chat</div>
+        <div v-if="!isLoading" class="messages" id="messages">
+            <div v-for="(msg, index) in msgs" :key="index">
+                <div style="color: aquamarine;">{{ msg.name }}</div>
+                <div style="color: orange;">{{ msg.message }}</div>
+                <br>
+            </div>
+        </div>
+        <div v-else class="spinner"><Spinner/></div>
+        <div v-if="noMessages">
+            <div style="color: yellow;"> Be the first to send a message !</div>
         </div>
     </div>
-    <div v-else>loading...</div>
-    <div v-if="noMessages">
-        <div style="color: yellow;"> Be the first to send a message !</div>
-    </div>
+    <form :action="sendMessage" @click.prevent="onSubmit">
+            <input v-model="name" type="text" placeholder="name">
+            <input v-model="message" type="text" placeholder="message">
+            <input type="submit" value="Send" @click="sendMessage">
+        </form>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
+import Spinner from "@/components/Spinner.vue"
 
+let name = ref("")
 let message = ref("")
 let socket = ref(null)
 let msgs = []
@@ -30,7 +35,7 @@ onMounted(() => {
     socket = new WebSocket("ws://localhost:8080/websocket")
     socket.onmessage = (msg) => {
         isLoading.value = true
-        if (!(JSON.parse(msg.data).name == "")) {
+        if (!(JSON.parse(msg.data) == null)) {
             noMessages.value = false
             msgs.push(JSON.parse(msg.data))
             isLoading.value = false
@@ -38,12 +43,14 @@ onMounted(() => {
             noMessages.value = true
         }
         isLoading.value = false
+        const elt = document.getElementById("messages")
+        elt.scrollTop = elt.scrollHeight
     }
 })
 
 function sendMessage() {
     let msg = {
-        "name": "Go user :)",
+        "name": name.value,
         "message": message.value
     }
     socket.send(JSON.stringify(msg))
@@ -52,10 +59,23 @@ function sendMessage() {
 </script>
 
 <style scoped>
-form {
-    margin-top: 20px;
+
+.chat {
+    background: rgb(51, 51, 51);
+    width: 50vw;
+    margin: 0 auto;
+    margin-top: 50px;
 }
 .h3 {
     margin-top: 20px;
+}
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.messages {
+    height: 300px;
+    overflow: auto;
 }
 </style>
