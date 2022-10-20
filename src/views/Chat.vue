@@ -16,10 +16,16 @@
         </div>
     </div>
     <form :action="sendMessage" @click.prevent="onSubmit">
-            <input v-model="name" type="text" placeholder="name">
-            <input v-model="message" type="text" placeholder="message">
-            <input type="submit" value="Send" @click="sendMessage">
-        </form>
+        <input v-model="name" type="text" placeholder="name">
+        <input v-model="message" type="text" placeholder="message">
+        <input type="submit" value="Send" @click="sendMessage">
+    </form>
+    <div class="test" id="test">
+        test <br>test <br>test <br>test <br>test <br>
+        test <br>test <br>test <br>test <br>test <br>test <br>test <br>
+        test <br>test <br>test <br>test <br>test <br>
+        test <br>test <br>test <br>test <br>test <br>
+    </div>  
 </template>
 
 <script setup>
@@ -45,10 +51,17 @@ onMounted(() => {
             noMessages.value = true
         }
         isLoading.value = false
-        const elt = document.getElementById("messages")
-        elt.scrollTop = elt.scrollHeight
+        scrollBottom()
     }
+    // setTimeout(() => {
+    //     scrollBottom()
+    // }, 1000)
 })
+
+function scrollBottom() {
+    const elt = document.getElementById("messages")
+    elt.scrollTop = elt.scrollHeight
+}
 
 function sendMessage() {
     let msg = {
@@ -64,7 +77,7 @@ function sendMessage() {
 
 .chat {
     background: rgb(51, 51, 51);
-    width: 50vw;
+    width: 30vw;
     margin: 0 auto;
     margin-top: 50px;
 }
@@ -77,7 +90,14 @@ function sendMessage() {
     align-items: center;
 }
 .messages {
-    height: 300px;
+    height: 250px;
+    overflow: auto;
+}
+.test {
+    background-color: black;
+    width: 20vw;
+    height: 250px;
+    margin: 0 auto;
     overflow: auto;
 }
 </style>
