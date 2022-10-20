@@ -75,7 +75,7 @@ async function submit() {
       "email": email.value,
       "password": password.value
     };
-    await axios.post(process.env.VUE_APP_API_URL + "/signup", JSON.stringify(obj))
+    await axios.post("https://hugopukito.com/api" + "/signup", JSON.stringify(obj))
     .then(resp => {
       if (resp.status == 201) {
         inCreation.value = false;
