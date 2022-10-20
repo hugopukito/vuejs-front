@@ -1,84 +1,99 @@
 <template>
-  <Input @submit="createMsg" />
-  <div v-if = isLoading><h1>loading...</h1></div>
-  <div class="msgs" v-else>
-    <div class="msg" v-for="(item, index) in msg" :key="index">
-        <div class="element">
-            <div class="nom"> {{ msg[msg.length-1-index].nom }} </div>
+    <div class="chat">
+        <div class="h3"> Websocket chat </div>
+        <div class="messages" id="messages">
         </div>
-        <div class="element">
-            <div class="message"> {{ msg[msg.length-1-index].message }} </div>
+        <div v-if="isLoading" class="spinner">
+            <Spinner/>
+        </div>
+        <div v-if="noMessages">
+            <div style="color: yellow;"> Be the first to send a message !</div>
         </div>
     </div>
-  </div>
+    <form :action="sendMessage" @click.prevent="onSubmit">
+        <input v-model="message" type="text" placeholder="message">
+        <input type="submit" value="Send" @click="sendMessage">
+    </form>
 </template>
 
 <script setup>
+import { ref, onMounted } from "vue";
+import Spinner from "@/components/Spinner.vue"
 
-import { ref, onMounted } from "vue"
-import axios from "axios"
-import Input from "@/components/Input.vue"
-
+let name = ref("")
+let message = ref("")
+let socket = ref(null)
+let noMessages = ref(false)
 let isLoading = ref(true)
-let msg = ref(String)
 
 onMounted(() => {
-    getMsg(),
-    refresh()
+    let msg_container = document.getElementById("messages")
+    socket = new WebSocket("ws://localhost:8080/websocket")
+    socket.onopen = () => {
+        isLoading.value = false
+    }
+    socket.onmessage = (msg) => {
+        let msgData = JSON.parse(msg.data)
+        if (!(msgData == null)) {
+            noMessages.value = false
+            const colors = msgData.color.split("/")
+            const rgb = `rgb(${colors[0]},${colors[1]},${colors[2]}`
+            let contentHtml = `<div class="message">
+            <span style="color: ${rgb}"> ${msgData.name}</span>: ${msgData.message}</div>`
+            msg_container.innerHTML += contentHtml
+            scrollBottom()
+        } else {
+            noMessages.value = true
+        }
+    }
 })
 
-async function getMsg () {
-    await axios.get("https://hugopukito.com/api")
-    .then(resp => {
-        msg.value = resp.data
-        isLoading.value = false
-    })
+function scrollBottom() {
+    const elt = document.getElementById("messages")
+    elt.scrollTop = elt.scrollHeight
 }
 
-function refresh() {
-    setInterval(function() {
-        getMsgRefresh()
-    }, 1000)
-}
-
-async function getMsgRefresh () {
-    await axios.get("https://hugopukito.com/api")
-    .then(resp => {
-        msg.value = resp.data
-    })
-}
-
-function createMsg(nom, message) {
-    const obj = {
-        "nom": nom.value,
+function sendMessage() {
+    let userName = localStorage.getItem("userName")
+    if (userName === null) {
+        userName = "anonymous"
+    }
+    console.log(userName)
+    let msg = {
+        "name": userName,
         "message": message.value
-    };
-    isLoading.value = true
-    axios.post("https://hugopukito.com/api/post", JSON.stringify(obj))
-    .then(getMsg())
+    }
+    socket.send(JSON.stringify(msg))
+    message.value = ""
 }
 </script>
 
 <style scoped>
-h1 {
-    color: aquamarine;
+
+.chat {
+    position: relative;
+    background: rgb(51, 51, 51);
+    width: 30vw;
+    min-height: 300px;
+    margin: 0 auto;
+    margin-top: 50px;
 }
-.msgs{
-    padding-top: 40px;
+.h3 {
+    margin-top: 20px;
 }
-.msg{
-    padding-top: 20px;
-    font-size: 30px;
-    color:chocolate;
+.spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
-.element{
-    display: inline-block;
-    margin: 10px;
+.messages {
+    height: 250px;
+    overflow: auto;
+    overflow-x: hidden;
+    text-align: left;
 }
-.nom{
-    color: aquamarine;
-}
-.message{
-    color: orange;
+::v-deep .message {
+    margin-top: 10px;
 }
 </style>

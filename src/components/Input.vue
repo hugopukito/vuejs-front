@@ -1,6 +1,5 @@
 <template>
-  <div class="form__group field">
-    <input v-model="nom" placeholder="Nom" />
+  <div>
     <input @keyup.enter="submit" v-model="message" placeholder="Message" />
     <button @click="submit">Envoyer</button>
   </div>
@@ -12,11 +11,10 @@ import { ref } from "vue"
 
 const emit = defineEmits(["submit"])
 
-let nom = ref("")
 let message = ref("")
 
 function submit() {
-    emit("submit", nom, message)
+    emit("submit", message)
     message.value = ""
 }
 

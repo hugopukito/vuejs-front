@@ -3,9 +3,6 @@
 ## images
 fix loading issue
 
-## class
-use vue class changer instead of getElementById
-
 ## fr / en
 add button to switch language
 
@@ -24,5 +21,6 @@ monitoring -> grafana live + telegraf websocket vs http (monitoring)
 chat       -> golang (back) & vuejs (front)
 
 ## fix
+use vue class changer instead of getElementById
 navbar -> two times @click trigger. 
 topics -> footer -> remove it without breaking the DOM.

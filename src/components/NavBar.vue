@@ -1,24 +1,72 @@
 <template>
   <div id ="box" class="box">
-    <div @click="trigger_navbar" style="margin-left: 1rem"> 
+    <div @click="trigger_navbar()" style="margin-left: 1rem"> 
       <font-awesome-icon icon="fa-solid fa-bars" size="xl" /> 
     </div>
     <img class="luffy" src="@/assets/luffy.png">
   </div>
   <nav id="nav"> 
     <ul>
-      <li><router-link to="/" @click="trigger_navbar"> Home </router-link> </li>
-      <li><router-link to="/topics" @click="trigger_navbar"> Topics </router-link> </li>
-      <li><router-link to="/keyboard" @click="trigger_navbar"> Keyboard </router-link> </li>
-      <li><router-link to="/monitoring" @click="trigger_navbar"> Monitoring </router-link> </li>
-      <!-- <li><router-link to="/chat" @click="trigger_navbar"> Chat </router-link> </li> -->
+      <li><router-link to="/" @click="trigger_navbar()"> Home </router-link> </li>
+      <li><router-link to="/topics" @click="trigger_navbar()"> Topics </router-link> </li>
+      <li><router-link to="/keyboard" @click="trigger_navbar()"> Keyboard </router-link> </li>
+      <li><router-link to="/monitoring" @click="trigger_navbar()"> Monitoring </router-link> </li>
+      <li><router-link to="/chat" @click="trigger_navbar()"> Chat </router-link> </li>
+      <div class="auth" v-if="userName === null">
+        <li> <a @click="trigger_navbar(); openSignup()"> Sign up </a> </li>
+        <li> <a @click="trigger_navbar(); openSignin()"> Sign in </a> </li>
+      </div>
+      <div class="auth" v-else>
+        <li> <a> {{ userName }} </a> </li>
+        <li> <a @click="logout()"> Sign out </a> </li>
+      </div>
     </ul>
   </nav>
+  <div>
+    <Signup @modal-boolean="closeSignup()" @signup-worked="closeSignup(); openSignin()" :isModalOpen="isSignupOpen"/>
+    <Signin @modal-boolean="closeSignin()" @signin-worked="closeSignin(); signin()" :isModalOpen="isSigninOpen"/>
+  </div>
 </template>
 
 <script setup>
+import { onMounted, ref, inject, provide } from "vue";
+import Signup from "./Signup.vue";
+import Signin from "./Signin.vue";
 
 const emit = defineEmits(["triggerNavbar"]);
+const isSignupOpen = ref(false);
+const isSigninOpen = ref(false);
+let userName = ref(null);
+
+onMounted(() => {
+  userName.value = localStorage.getItem("userName");
+})
+
+function signin(){
+  userName.value = localStorage.getItem("userName");
+}
+
+function logout() {
+  localStorage.removeItem("userName");
+  localStorage.removeItem("token");
+  userName.value = null;
+}
+
+function openSignup() {
+  isSignupOpen.value = true;
+}
+
+function closeSignup() {
+  isSignupOpen.value = false;
+}
+
+function openSignin() {
+  isSigninOpen.value = true;
+}
+
+function closeSignin() {
+  isSigninOpen.value = false;
+}
 
 function trigger_navbar() {
   emit("triggerNavbar");
@@ -30,11 +78,15 @@ function trigger_navbar() {
 }
 </script>
 
-
 <style scoped>
 nav {
   list-style: none;
   text-align: center;
+}
+
+.auth {
+  float: right;
+  cursor: pointer;
 }
 
 ul {
@@ -47,6 +99,7 @@ ul {
 }
 
 li {
+  float: left;
   display: inline;
 }
 
@@ -71,7 +124,9 @@ li a:hover {
 .box {
   display: none;
 }
+</style>
 
+<style scoped>
 @media screen and (max-device-width: 500px) {
   nav {
     position: absolute;
@@ -85,6 +140,12 @@ li a:hover {
     display: flex;
     flex-direction: column;
   }
+  .auth {
+    margin-top: auto;
+    margin-bottom: 200px;
+    display: flex;
+    flex-direction: column;
+  } 
   .box {
     display: flex;
     width: 100vw;

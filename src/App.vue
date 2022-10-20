@@ -1,5 +1,5 @@
 <template>
-  <nav-bar @trigger-navbar="changeRouterView"/>
+  <NavBar @trigger-navbar="changeRouterView()"/>
   <div id="router" class="router">
     <router-view/>
   </div>
@@ -7,6 +7,30 @@
 
 <script setup>
 import NavBar from "@/components/NavBar.vue"
+import { ref, onMounted } from "vue";
+
+let render = ref(true);
+var Buffer = require('buffer/').Buffer
+
+onMounted(() => {
+  if (localStorage.token != null) {
+    const jwtPayload = parseJwt(localStorage.token);
+    if (jwtPayload.exp < Date.now()/1000) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userName");
+    }
+  }
+})
+
+function parseJwt (token) {
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  var jsonPayload = decodeURIComponent(Buffer.from(base64, "base64").toString("ascii").split("").map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+
+  return JSON.parse(jsonPayload);
+};
 
 function changeRouterView() {
   if (document.getElementById("router").classList.contains("disable")) {
