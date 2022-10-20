@@ -1,15 +1,10 @@
 <template>
     <div class="chat">
-        <div class="h3">Websocket chat</div>
+        <div class="h3"> Websocket chat </div>
         <div class="messages" id="messages">
-          <div v-if="!isLoading">
-            <div v-for="(msg, index) in msgs" :key="index">
-                <div style="color: aquamarine;">{{ msg.name }}</div>
-                <div style="color: orange;">{{ msg.message }}</div>
-                <br>
-            </div>
         </div>
-        <div v-else class="spinner"><Spinner/></div>  
+        <div v-if="isLoading" class="spinner">
+            <Spinner/>
         </div>
         <div v-if="noMessages">
             <div style="color: yellow;"> Be the first to send a message !</div>
@@ -20,12 +15,6 @@
         <input v-model="message" type="text" placeholder="message">
         <input type="submit" value="Send" @click="sendMessage">
     </form>
-    <div class="test" id="test">
-        test <br>test <br>test <br>test <br>test <br>
-        test <br>test <br>test <br>test <br>test <br>test <br>test <br>
-        test <br>test <br>test <br>test <br>test <br>
-        test <br>test <br>test <br>test <br>test <br>
-    </div>  
 </template>
 
 <script setup>
@@ -35,27 +24,30 @@ import Spinner from "@/components/Spinner.vue"
 let name = ref("")
 let message = ref("")
 let socket = ref(null)
-let msgs = []
 let noMessages = ref(false)
 let isLoading = ref(true)
 
 onMounted(() => {
+    let msg_container = document.getElementById("messages")
     socket = new WebSocket("ws://localhost:8080/websocket")
+    socket.onopen = () => {
+        isLoading.value = false
+    }
     socket.onmessage = (msg) => {
-        isLoading.value = true
-        if (!(JSON.parse(msg.data) == null)) {
+        let msgData = JSON.parse(msg.data)
+        if (!(msgData == null)) {
             noMessages.value = false
-            msgs.push(JSON.parse(msg.data))
-            isLoading.value = false
+            console.log(msgData.color)
+            const colors = msgData.color.split("/")
+            const rgb = `rgb(${colors[0]},${colors[1]},${colors[2]}`
+            let contentHtml = `<div class="message">
+            <span style="color: ${rgb}"> ${msgData.name}</span>: ${msgData.message}</div>`
+            msg_container.innerHTML += contentHtml
+            scrollBottom()
         } else {
             noMessages.value = true
         }
-        isLoading.value = false
-        scrollBottom()
     }
-    // setTimeout(() => {
-    //     scrollBottom()
-    // }, 1000)
 })
 
 function scrollBottom() {
@@ -76,8 +68,10 @@ function sendMessage() {
 <style scoped>
 
 .chat {
+    position: relative;
     background: rgb(51, 51, 51);
     width: 30vw;
+    min-height: 300px;
     margin: 0 auto;
     margin-top: 50px;
 }
@@ -85,19 +79,18 @@ function sendMessage() {
     margin-top: 20px;
 }
 .spinner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 .messages {
     height: 250px;
     overflow: auto;
+    overflow-x: hidden;
+    text-align: left;
 }
-.test {
-    background-color: black;
-    width: 20vw;
-    height: 250px;
-    margin: 0 auto;
-    overflow: auto;
+::v-deep .message {
+    margin-top: 10px;
 }
 </style>
