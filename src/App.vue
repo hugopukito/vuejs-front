@@ -1,7 +1,7 @@
 <template>
-  <NavBar @trigger-navbar="changeRouterView()" @re-render="reRender()"/>
+  <NavBar @trigger-navbar="changeRouterView()"/>
   <div id="router" class="router">
-    <router-view v-if="render"/>
+    <router-view/>
   </div>
 </template>
 
@@ -31,13 +31,6 @@ function parseJwt (token) {
 
   return JSON.parse(jsonPayload);
 };
-
-function reRender(){
-  render.value = false;
-  render.value = true;
-  console.log("test");
-  // re render not working, chat bug
-}
 
 function changeRouterView() {
   if (document.getElementById("router").classList.contains("disable")) {

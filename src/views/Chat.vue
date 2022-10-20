@@ -11,7 +11,6 @@
         </div>
     </div>
     <form :action="sendMessage" @click.prevent="onSubmit">
-        <input v-model="name" type="text" placeholder="name">
         <input v-model="message" type="text" placeholder="message">
         <input type="submit" value="Send" @click="sendMessage">
     </form>
@@ -37,7 +36,6 @@ onMounted(() => {
         let msgData = JSON.parse(msg.data)
         if (!(msgData == null)) {
             noMessages.value = false
-            console.log(msgData.color)
             const colors = msgData.color.split("/")
             const rgb = `rgb(${colors[0]},${colors[1]},${colors[2]}`
             let contentHtml = `<div class="message">
@@ -56,8 +54,13 @@ function scrollBottom() {
 }
 
 function sendMessage() {
+    let userName = localStorage.getItem("userName")
+    if (userName === null) {
+        userName = "anonymous"
+    }
+    console.log(userName)
     let msg = {
-        "name": name.value,
+        "name": userName,
         "message": message.value
     }
     socket.send(JSON.stringify(msg))

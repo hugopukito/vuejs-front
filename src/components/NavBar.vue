@@ -33,7 +33,7 @@ import { onMounted, ref, inject, provide } from "vue";
 import Signup from "./Signup.vue";
 import Signin from "./Signin.vue";
 
-const emit = defineEmits(["triggerNavbar", "reRender"]);
+const emit = defineEmits(["triggerNavbar"]);
 const isSignupOpen = ref(false);
 const isSigninOpen = ref(false);
 let userName = ref(null);
@@ -44,14 +44,12 @@ onMounted(() => {
 
 function signin(){
   userName.value = localStorage.getItem("userName");
-  emit("reRender");
 }
 
 function logout() {
   localStorage.removeItem("userName");
   localStorage.removeItem("token");
   userName.value = null;
-  emit("reRender");
 }
 
 function openSignup() {
