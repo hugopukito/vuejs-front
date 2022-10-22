@@ -28,7 +28,7 @@ let isLoading = ref(true)
 
 onMounted(() => {
     let msg_container = document.getElementById("messages")
-    socket = new WebSocket("ws://hugopukito.com/api/websocket")
+    socket = new WebSocket("wss://hugopukito.com/api/websocket")
     socket.onopen = () => {
         isLoading.value = false
     }
