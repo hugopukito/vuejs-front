@@ -69,7 +69,7 @@ async function submit() {
       "email": email.value,
       "password": password.value
     };
-    await axios.post("https://hugopukito.com/api" + "/signin", JSON.stringify(obj))
+    await axios.post(process.env.VUE_APP_API_URL + "/signin", JSON.stringify(obj))
     .then(resp => {
       if (resp.status == 200) {
         inConnection.value = false;
