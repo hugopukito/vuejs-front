@@ -1,19 +1,21 @@
 <template>
-    <div class="chat">
-        <div class="h3"> Websocket chat </div>
-        <div class="messages" id="messages">
+    <div class="main">
+        <div class="h3"> Chat working with WebSockets</div>
+        <div class="chat">
+            <ul class="messages" id="messages">
+            </ul>
+            <div v-if="isLoading" class="spinner">
+                <Spinner/>
+            </div>
+            <div v-if="noMessages">
+                <div style="color: yellow;"> Be the first to send a message !</div>
+            </div>
         </div>
-        <div v-if="isLoading" class="spinner">
-            <Spinner/>
-        </div>
-        <div v-if="noMessages">
-            <div style="color: yellow;"> Be the first to send a message !</div>
-        </div>
+        <form :action="sendMessage" @click.prevent="onSubmit">
+            <input v-model="message" type="text" placeholder="message">
+            <input type="submit" value="Send" @click="sendMessage">
+        </form>
     </div>
-    <form :action="sendMessage" @click.prevent="onSubmit">
-        <input v-model="message" type="text" placeholder="message">
-        <input type="submit" value="Send" @click="sendMessage">
-    </form>
 </template>
 
 <script setup>
@@ -28,7 +30,7 @@ let isLoading = ref(true)
 
 onMounted(() => {
     let msg_container = document.getElementById("messages")
-    socket = new WebSocket("wss://hugopukito.com/api/websocket")
+    socket = new WebSocket(process.env.VUE_APP_WS_URL)
     socket.onopen = () => {
         isLoading.value = false
     }
@@ -38,8 +40,8 @@ onMounted(() => {
             noMessages.value = false
             const colors = msgData.color.split("/")
             const rgb = `rgb(${colors[0]},${colors[1]},${colors[2]}`
-            let contentHtml = `<div class="message">
-            <span style="color: ${rgb}"> ${msgData.name}</span>: ${msgData.message}</div>`
+            let contentHtml = `<li class="message">
+            <span style="color: ${rgb}"> ${msgData.name}</span>: ${msgData.message}</li>`
             msg_container.innerHTML += contentHtml
             scrollBottom()
         } else {
@@ -58,7 +60,6 @@ function sendMessage() {
     if (userName === null) {
         userName = "anonymous"
     }
-    console.log(userName)
     let msg = {
         "name": userName,
         "message": message.value
@@ -69,17 +70,17 @@ function sendMessage() {
 </script>
 
 <style scoped>
-
-.chat {
-    position: relative;
-    background: rgb(51, 51, 51);
-    width: 30vw;
-    min-height: 300px;
-    margin: 0 auto;
-    margin-top: 50px;
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    margin: 50px auto;
 }
-.h3 {
-    margin-top: 20px;
+.chat {
+    background: rgb(51, 51, 51);
+}
+form {
+    
 }
 .spinner {
     position: absolute;
@@ -88,12 +89,30 @@ function sendMessage() {
     transform: translate(-50%, -50%);
 }
 .messages {
-    height: 250px;
+    height: 450px;
+    margin: 0;
+    padding: 0;
     overflow: auto;
     overflow-x: hidden;
     text-align: left;
 }
-::v-deep .message {
-    margin-top: 10px;
+:deep(.message) {
+    font-size: 18px;
+    list-style: none;
+    padding: 5px;
+}
+:deep(.message):nth-child(odd) {
+    background-color: rgb(31, 25, 37);
+}
+:deep(.message):nth-child(even) {
+    background-color: rgb(15, 15, 15);
+}
+</style>
+
+<style scoped>
+@media screen and (max-device-width: 480px) {
+  .main {
+    width: 95vw;
+  }
 }
 </style>
