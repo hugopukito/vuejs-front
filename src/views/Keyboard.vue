@@ -38,7 +38,7 @@
     I recommend taking the hotswap version, so you can easily take in and off switches from the PCB.
     If you're an old school, maybe you'll prefer to solder every single switch to your PCB.
   </div>
-  <img src="@/assets/keyboard/PCB.png">
+  <img loading="lazy" src="@/assets/keyboard/PCB.png">
   <div class="text">
     The PCB I choosed is the CK65 (rgb 🌈) from candykey, it's a 65%, ISO-FR and hot swappable PCB. Reference 
     <a href="https://candykeys.com/product/ck65-iso-pcb-hotswap" target="_blank"> here</a>.
