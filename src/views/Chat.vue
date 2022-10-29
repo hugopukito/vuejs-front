@@ -12,7 +12,7 @@
             </div>
         </div>
         <form :action="sendMessage" @click.prevent="onSubmit">
-            <input v-model="message" type="text" placeholder="message">
+            <input v-model="message" type="text" placeholder="Enter message...">
             <input type="submit" value="Send" @click="sendMessage">
         </form>
     </div>
@@ -80,7 +80,31 @@ function sendMessage() {
     background: rgb(51, 51, 51);
 }
 form {
-    
+    background-color: aqua;
+    display: flex;
+    height: 30px;
+    caret-color: white;
+}
+input[type=text] {
+    flex: 1;
+    background-color: #333;
+    border: none;
+}
+input::placeholder, input:focus {
+    color: white;
+    font-size: 15px;
+    outline: none;
+}
+input:focus::placeholder {
+  color: transparent;
+}
+input[type=submit] {
+    background-color: rgb(122, 5, 168);
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding-right: 13px;
+    padding-left: 13px;
 }
 .spinner {
     position: absolute;
