@@ -22,7 +22,6 @@
 import { ref, onMounted } from "vue";
 import Spinner from "@/components/Spinner.vue"
 
-let name = ref("")
 let message = ref("")
 let socket = ref(null)
 let noMessages = ref(false)
@@ -56,6 +55,9 @@ function scrollBottom() {
 }
 
 function sendMessage() {
+    const submit = document.forms[0].querySelector('input[type="submit"]')
+    submit.focus()
+
     let userName = localStorage.getItem("userName")
     if (userName === null) {
         userName = "anonymous"
