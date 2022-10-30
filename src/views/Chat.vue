@@ -55,8 +55,9 @@ function scrollBottom() {
 }
 
 function sendMessage() {
-    const submit = document.forms[0].querySelector('input[type="submit"]')
-    submit.focus()
+    const form = document.forms[0]
+    const input_text = form.querySelector('input[type="text"]')
+    input_text.focus()
 
     let userName = localStorage.getItem("userName")
     if (userName === null) {
