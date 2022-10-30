@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <div class="h3"> Chat working with WebSockets</div>
+        <div class="h3"> Chat working with WebSockets !</div>
         <div class="chat">
             <ul class="messages" id="messages">
             </ul>
