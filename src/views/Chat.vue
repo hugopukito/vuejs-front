@@ -93,10 +93,11 @@ input[type=text], input[type=submit] {
 input[type=text] {
     flex: 1;
     background-color: #333;
+    font-size: 16px;
 }
 input::placeholder, input:focus {
     color: white;
-    font-size: 15px;
+    font-size: 16px;
     outline: none;
 }
 input:focus::placeholder {
