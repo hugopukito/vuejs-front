@@ -6,7 +6,8 @@
           <li class="hardware&os" @click="trigger_navbar"><a href="#hardware&os">Hardware & OS ⚙️</a></li>
           <li class="ssh" @click="trigger_navbar"><a href="#ssh">SSH 🔌</a></li>
           <li class="ssh_keys" @click="trigger_navbar"><a href="#ssh_keys">SSH Keys 🔑</a></li>
-          <li class="port_forwarding" @click="trigger_navbar"><a href="#port_forwarding">Port forwarding</a></li>
+          <li class="port_forwarding" @click="trigger_navbar"><a href="#port_forwarding">Port forwarding 🌐</a></li>
+          <li class="dns" @click="trigger_navbar"><a href="#dns">DNS 🌎</a></li>
           <li class="nginx&https" @click="trigger_navbar"><a href="#nginx&https">NGINX & HTTPS</a></li>
           <li class="monitoring" @click="trigger_navbar"><a href="#monitoring">Monitoring 📺</a></li>
           <li class="chat" @click="trigger_navbar"><a href="#chat">Chat 🗣️</a></li>
@@ -102,9 +103,46 @@
         </div>
       </section>
       <section id="port_forwarding">
-        <div class="h2">Port forwarding</div>
+        <div class="h2">Port forwarding 🌐</div>
         <div class="text">
-          &#9888; In progress... &#9888;
+          If you want to connect on your pi4 without being connected to your local network, you can enable port forwarding 
+          on your internet provider's
+          interface. You can access it by typing '192.168.0.1' or '192.168.1.1' (depends on your internet box). <br> <br>
+          Your login should be 'admin' and the password usually is your wifi's password. <br> <br>
+          Once you've logged in, you should see the IP address of your internet box, this one is unique and you're gonna need it for later. 
+          Go on the section "port forwarding". <br> <br>
+          Now you need to enter the port you want to forward, in our case, the port '22' for ssh. Then select "both protocol" and put pi4 
+          local ip address. <br> <br>
+          Try to open a terminal on your local machine, instead of <code>ssh 'pi4_host_name'@'pi4_ip_address'</code> try using <br> <br>
+          <code> ssh 'pi4_host_name'@'your_internet_box_ip_address'</code> <br> <br>
+          You should be able to access your pi4 with another internet connection and access it from anywhere ✨ <br> <br>
+          You can forward other ports, so everything which is running on a certain port locally on your pi4 can be access from anywhere ! <br> <br>
+          If you're running an api on port 8080, forward this port, put pi4 local ip address, then type 'your_internet_box_ip_address':8080 and
+          you will be able to access your api running on your pi4 without being connected on your local network 🙃 <br> <br>
+          If you type 'your_internet_box_ip_address' without specifying any port behind, it gonna use the port 80. <br> <br>
+          Forward the port 80 of your box on the port 80 of your pi4, run a little program on you pi4 like "node.js" on port 80 
+          and provide an index.html file. <br> <br>
+          Type 'your_internet_box_ip_address', you should see your index.html 😋
+        </div>
+      </section>
+      <section id="dns">
+        <div class="h2">DNS 🌎</div>
+        <div class="text">
+          Typing your box internet ip address can be anoying, especially if you want to present your fresh index.html to someone 🧊 <br> <br>
+          Buying a domain name and put it on your ip address is really simple and cheap (7💲 a year) <br> <br>
+          That's how I did to make 'hugopukito.com' use my box internet 
+          ip address so you can access this website (running on port 80 with port forwarding). <br> <br>
+          I used <a href="https://www.namecheap.com/" target="_blank"> name cheap </a> to buy my domain name, once you found a name available, 
+          buy it, select it and go to "Advanced DNS".
+        </div>
+
+        <img src="@/assets/topics/name_cheap.png">
+
+        <div class="text">
+          Replace the hidden value by your box internet ip address and "hugopukito.com" by your domain name <br> <br>
+          Now you can try on your local machine <code> ssh 'pi4_host_name'@'your_domain_name'</code> <br> <br>
+          If you type your domain name on google's search bar, you should see your fresh index.html 🧊 <br> <br>
+          You don't need anymore your box internet ip address and can give your domain name to your friends 😋
         </div>
       </section>
       <section id="nginx&https">
