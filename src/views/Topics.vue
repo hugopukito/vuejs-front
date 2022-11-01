@@ -80,8 +80,25 @@
           Now you can access your pi4 and program stuff on it, you may want to remove the password but still get a layer of security so
           not anyone can access it (although the pi4 is only visible on your local network for the moment) 🙃 <br> <br>
           The solution is SSH keys, you will generate a pair of key with your pi4, one public that will be store on your pi4, the other
-          one that you will keep secret and store on the device which will access the pi4. <br> <br> <br>
-          &#9888; In progress... &#9888;
+          one that you will keep secret and store on the device which will access the pi4. <br> <br>
+          To generate those keys, you will need to use the command <code> ssh-keygen</code>. <br> <br>
+          Then they will ask you a file to save the public and private key, just press Enter. You will need to enter a passphrase, it's up to you,
+          if you feel like your private key won't be stolen, just press Enter. If you set a passphrase, each time you will try to connect
+          with ssh on your pi4, it will ask you the passphrase. <br> <br>
+          Setting a passphrase will add another layer of security, brut forcing rsa keys need a lot of ressource so an attacker won't
+          try to brut force your private key, but if he steals your private key, the passphrase will slow down the attacker. <br> <br>
+          Now you've generated the two keys in <code>/home/'pi4_host_name'/.ssh/</code>, public key: id_rsa.pub, private key: id_rsa, 
+          take the private key with a secure way (best way is to store it in an usb key). <br> <br>
+          Next step is to go on the machine you wanna use to connect on your pi4, take your private key (id_rsa) and place it in
+          <code>/home/'your_machine_name'/.ssh/</code>. <br> <br>
+          Try to connect on your pi4 with <code>ssh 'pi4_host_name'@'pi4_ip_address'</code>, it will ask you your passphrase (if you set one),
+          there is one more thing to change on your pi4, if someone don't have any private key on their machine they use to connect on your pi4,
+          they will use automatically your basic authentication. <br> <br>
+          So you need to disable it to anyone that doesn't have the key can't use the basic
+          authentication. <br> <br>
+          Go on your pi4, use <code> sudo nano /etc/ssh/sshd_config</code> and set <code> PasswordAuthentication no</code> <br> <br>
+          Now you can restart ssh service and your done ! <br> <br> 
+          <code> sudo service ssh restart</code>
         </div>
       </section>
       <section id="port_forwarding">
