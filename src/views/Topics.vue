@@ -169,6 +169,7 @@
           <code>cd /etc/nginx/sites-enabled/ && touch 'your_dns'</code> <br> <br>
           And create a link between sites-enabled and sites-available so you don't need to duplicate this file. <br> <br>
           <code>ln -s /etc/nginx/sites-enabled/'your_dns' /etc/nginx/sites-available/</code> <br> <br>
+          🚧 In progress... 🚧
           <!-- Now everything you add in this file (mine is hugopukito.com) will be used by nginx as a conf file, 
           you can now put your index.html like so :
           <pre>
