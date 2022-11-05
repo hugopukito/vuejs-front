@@ -8,7 +8,8 @@
           <li class="ssh_keys" @click="trigger_navbar"><a href="#ssh_keys">SSH Keys 🔑</a></li>
           <li class="port_forwarding" @click="trigger_navbar"><a href="#port_forwarding">Port forwarding 🌐</a></li>
           <li class="dns" @click="trigger_navbar"><a href="#dns">DNS 🌎</a></li>
-          <li class="nginx&https" @click="trigger_navbar"><a href="#nginx&https">NGINX & HTTPS</a></li>
+          <li class="nginx" @click="trigger_navbar"><a href="#nginx">NGINX 🛣️</a></li>
+          <li class="https" @click="trigger_navbar"><a href="#https">HTTPS 🔒</a></li>
           <li class="monitoring" @click="trigger_navbar"><a href="#monitoring">Monitoring 📺</a></li>
           <li class="chat" @click="trigger_navbar"><a href="#chat">Chat 🗣️</a></li>
         </ul>
@@ -44,9 +45,9 @@
           </div>
             
           <div class="text" style="color: rgb(252, 58, 58)">
-            &#9888; If you've got message error "unable to read partition as fat",
+            🚧 If you've got message error "unable to read partition as fat",
             just destroy your SD card and buy another one. You can try to repair it by searching for solution, 
-            in my case I couldn't do anything so I changed it. &#9888;
+            in my case I couldn't do anything so I changed it. 🚧
           </div>
 
           <div class="text">
@@ -145,32 +146,70 @@
           You don't need anymore your box internet ip address and can give your domain name to your friends 😋
         </div>
       </section>
-      <section id="nginx&https">
-        <div class="h2">NGINX & HTTPS</div>
+      <section id="nginx">
+        <div class="h2">NGINX 🛣️</div>
         <div class="text">
-          &#9888; In progress... &#9888;
+          By accessing your ip with your DNS, you get on the port 80 by default, if you want to access a service
+          running on another port, for example port 8080, you need to type 'your_dns':8080, you also need to
+          add port 8080 on port forwarding on your internet box configuration, it can be pretty anoying if you
+          want to add different services on your pi4. <br> <br>
+          Thanks to a reverse proxy, you can do some routing on your DNS ! <br> <br>
+          Imagine you're running your golang api on localhost:8080, you want to access it with your DNS by typing
+          'your_dns'/api (for example). <br> <br>
+          By running NGINX on your pi4, you will be able to configure all 
+          routes to go on your local services. <br> <br>
+          NGINX will run on your port 80 by default, you will first configure the default route to give your
+          index.html 🧊. So when a user will type your DNS, it will go on your port 80, then go on your NGINX
+          and will route to your index.html. <br> <br>
+          <code>sudo apt install nginx</code> <br> <br>
+          Now you need to go in nginx directory and create your own conf file for your website. <br> <br> 
+          <code>cd /etc/nginx/sites-enabled/</code> <br> <br> 
+          <code>cd /etc/nginx/sites-available/</code> <br> <br> 
+          Remove everything in those folders, create a file named with your DNS (for me it's hugopukito.com) <br> <br>
+          <code>cd /etc/nginx/sites-enabled/ && touch 'your_dns'</code> <br> <br>
+          And create a link between sites-enabled and sites-available so you don't need to duplicate this file. <br> <br>
+          <code>ln -s /etc/nginx/sites-enabled/'your_dns' /etc/nginx/sites-available/</code> <br> <br>
+          <!-- Now everything you add in this file (mine is hugopukito.com) will be used by nginx as a conf file, 
+          you can now put your index.html like so :
+          <pre>
+          <code style="display:block;">http {
+            server {
+              listen 80;
+              location / 
+                {
+                  root /www/data;
+                }
+              }
+            }</code>
+          </pre> -->
+        </div>
+      </section>
+      <section id="https">
+        <div class="h2">HTTPS 🔒</div>
+        <div class="text">
+          🚧 In progress... 🚧
         </div>
       </section>
       <section id="monitoring">
         <div class="h2">Monitoring 📺</div>
         <div class="h3">Grafana</div>
         <div class="text">
-          &#9888; In progress... &#9888;
+          🚧 In progress... 🚧
         </div>
         <div class="h3">Telegraf</div>
         <div class="text">
-          &#9888; In progress... &#9888;
+          🚧 In progress... 🚧
         </div>
       </section>
       <section id="chat">
         <div class="h2">Chat 🗣️</div>
         <div class="h3">Back-end</div>
         <div class="text">
-          &#9888; In progress... &#9888;
+          🚧 In progress... 🚧
         </div>
         <div class="h3">Front-end</div>
         <div class="text">
-          &#9888; In progress... &#9888;
+          🚧 In progress... 🚧
         </div>
       </section>
     </div>
