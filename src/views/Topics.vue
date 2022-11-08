@@ -10,12 +10,10 @@
           <li class="dns" @click="trigger_navbar"><a href="#dns">DNS 🌎</a></li>
           <li class="nginx" @click="trigger_navbar"><a href="#nginx">NGINX 🛣️</a></li>
           <li class="https" @click="trigger_navbar"><a href="#https">HTTPS 🔒</a></li>
-          <li class="monitoring" @click="trigger_navbar"><a href="#monitoring">Monitoring 📺</a></li>
-          <li class="chat" @click="trigger_navbar"><a href="#chat">Chat 🗣️</a></li>
         </ul>
     </nav>
     <div id="main" class="main">
-      <div class="h1"> Remake this website </div>
+      <div class="h1"> Deploy your website </div>
       <div id ="box" class="box">
         <div @click="trigger_navbar" style="margin: 5px"> Find your topic &nbsp;
           <font-awesome-icon icon="fa-solid fa-magnifying-glass" /> 
@@ -188,47 +186,81 @@
           <div class="code" style="text-align:left;">
             server { <br>
               &ensp; listen 80; <br> <br>
-              &ensp; location / { <br>
-              &ensp; &ensp; root /home/'yourWorkDir'/website; <br> 
-              &ensp;&ensp;} <br> <br>
+              &ensp; root /home/'yourWorkDir'/website; <br> <br>
               &ensp; location /api { <br>
+              &ensp; &ensp; rewrite  ^/api/(.*)  /$1 break; <br>
               &ensp; &ensp; proxy_pass http://127.0.0.1:8080; <br> 
               &ensp;&ensp;} <br>
             } <br>
           </div>
           We add the route /api in our conf, '127.0.0.1' refer to 'localhost'. The proxy pass will pass
           all request on our DNS with /api on our service running on local on port 8080. <br> <br>
+          To get proper route rewriting calling the intern routes of your api, you can use the rewrite option. <br> <br>
+          Notice that you don't really need to specify the '/' location for the root route. <br> <br>
           Personnally, I need to type 'hugopukito.com/api' to access my api running locally on port 8080 <br> <br>
           Try typing 'yourDns'/api, you should see the response from your api printing ! 🐯 <br> <br>
-          You can create as many services as you want and route then with NGINX ✨
+          You can create as many services as you want and route then with NGINX ✨ <br> <br>
         </div>
       </section>
       <section id="https">
         <div class="h2">HTTPS 🔒</div>
-        <div class="text" style="text-align:center;">
-          🚧 In progress... 🚧
-        </div>
-      </section>
-      <section id="monitoring">
-        <div class="h2">Monitoring 📺</div>
-        <div class="h3">Grafana</div>
-        <div class="text" style="text-align:center;">
-          🚧 In progress... 🚧
-        </div>
-        <div class="h3">Telegraf</div>
-        <div class="text" style="text-align:center;">
-          🚧 In progress... 🚧
-        </div>
-      </section>
-      <section id="chat">
-        <div class="h2">Chat 🗣️</div>
-        <div class="h3">Back-end</div>
-        <div class="text" style="text-align:center;">
-          🚧 In progress... 🚧
-        </div>
-        <div class="h3">Front-end</div>
-        <div class="text" style="text-align:center;">
-          🚧 In progress... 🚧
+        <div class="text">
+          Once your website is running with different services, you may want to use https instead of http. <br> <br>
+          This can be done for free by using a program called Let's encrypt. <br> <br>
+          Let's install the certbot tool made by them and get into it.
+          <div class="code">sudo apt install certbot</div> 
+          This tool will generate a 3 month certificate that ensure data transiting on your website is encrypted. <br> <br>
+          Make sure to stop nginx before launching the command, this bot will test your 80 port, so it need to be free <br> <br>
+          <div class="code">sudo systemctl stop nginx</div>
+          <div class="code">sudo certbot certonly --standalone --preferred-challenges http-01 -d 'yourDns'</div>
+          Now you've got ssl certificate and the key with it, you will need to specify the location of those files
+          in your nginx conf.
+          <div class="code" style="text-align:left;">
+            server { <br>
+              &ensp; listen 80; <br>
+              &ensp; server_name 'yourDns' <br>
+              &ensp; return 301 https://$server_name$request_uri; <br>
+            } <br> <br>
+            server { <br>
+              &ensp; listen 443 ssl http2; <br>
+              &ensp; server_name 'yourDns' <br> <br>
+              &ensp; ssl_certificate /etc/letsencrypt/live/'yourDns'/fullchain.pem; <br>
+              &ensp; ssl_certificate_key /etc/letsencrypt/live/'yourDns'/privkey.pem; <br> <br>
+              &ensp; root /home/'yourWorkDir'/website; <br>
+            } <br>
+          </div>
+          Now all request comming on port 80 (http) will be redirect on port 443 (https), you should see
+          the green padlock before the url of your website on your browser once your restarted nginx. <br> <br>
+          You will need to regenerate your certificate because it expire every 3 months, 
+          you can do it 1 month before it expire with this command, don't forget to stop nginx before <br> <br>
+          <div class="code">sudo systemctl stop nginx</div>
+          <div class="code">sudo certbot renew</div>
+          There is one last thing to take into considaration, all your services are still running with http except
+          your website. The api we routed before don't have any certificate link to it. <br> <br>
+          There is a trick to pass the request made to the api in https from users to http in local.
+          <div class="code" style="text-align:left;">
+            server { <br>
+              &ensp; listen 80; <br>
+              &ensp; server_name 'yourDns' <br>
+              &ensp; return 301 https://$server_name$request_uri; <br>
+            } <br> <br>
+            server { <br>
+              &ensp; listen 443 ssl http2; <br>
+              &ensp; server_name 'yourDns' <br> <br>
+              &ensp; ssl_certificate /etc/letsencrypt/live/'yourDns'/fullchain.pem; <br>
+              &ensp; ssl_certificate_key /etc/letsencrypt/live/'yourDns'/privkey.pem; <br> <br>
+              &ensp; root /home/'yourWorkDir'/website; <br> <br>
+              &ensp; location /api { <br>
+              &ensp; &ensp; rewrite  ^/api/(.*)  /$1 break; <br>
+              &ensp; &ensp; proxy_pass http://127.0.0.1:8080; <br> 
+              &ensp; &ensp; proxy_set_header Host $host; <br>
+              &ensp; &ensp; proxy_set_header X-Real-IP $remote_addr; <br>
+              &ensp; &ensp; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; <br>
+              &ensp; &ensp; proxy_set_header X-Forwarded-Proto https; <br>
+              &ensp;&ensp;} <br>
+            } <br>
+          </div>
+          Now you can fully use https 🔒 with all your services ! ✨
         </div>
       </section>
     </div>
@@ -268,6 +300,7 @@ img {
   padding: 10px;
   border-radius: 10px;
   font-family: monospace;
+  font-size: 0.8em;
   margin: 20px 0;
   text-align: start;
 }
