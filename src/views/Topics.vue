@@ -224,8 +224,8 @@
             server { <br>
               &ensp; listen 443 ssl http2; <br>
               &ensp; server_name 'yourDns' <br> <br>
-              &ensp; ssl_certificate /etc/letsencrypt/live/'yourDns'/fullchain.pem; <br>
-              &ensp; ssl_certificate_key /etc/letsencrypt/live/'yourDns'/privkey.pem; <br> <br>
+              &ensp; ssl_certificate /etc/letsencrypt/live/'your Dns'/fullchain.pem; <br>
+              &ensp; ssl_certificate_key /etc/letsencrypt/live/'your Dns'/privkey.pem; <br> <br>
               &ensp; root /home/'yourWorkDir'/website; <br>
             } <br>
           </div>
@@ -247,8 +247,8 @@
             server { <br>
               &ensp; listen 443 ssl http2; <br>
               &ensp; server_name 'yourDns' <br> <br>
-              &ensp; ssl_certificate /etc/letsencrypt/live/'yourDns'/fullchain.pem; <br>
-              &ensp; ssl_certificate_key /etc/letsencrypt/live/'yourDns'/privkey.pem; <br> <br>
+              &ensp; ssl_certificate /etc/letsencrypt/live/'your Dns'/fullchain.pem; <br>
+              &ensp; ssl_certificate_key /etc/letsencrypt/live/'your Dns'/privkey.pem; <br> <br>
               &ensp; root /home/'yourWorkDir'/website; <br> <br>
               &ensp; location /api { <br>
               &ensp; &ensp; rewrite  ^/api/(.*)  /$1 break; <br>

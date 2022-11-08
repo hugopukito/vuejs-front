@@ -13,13 +13,6 @@ maybe pi4 logo, with signs this website self-hosted
 ## topics
 add arrow on bottom to get back on top of page
 
-## topics items
-ssh        -> remove password ssh
-port forw  -> port 80 443 22
-nginx      -> https (certbot) with http
-monitoring -> grafana live + telegraf websocket vs http (monitoring)
-chat       -> golang (back) & vuejs (front)
-
 ## fix
 use vue class changer instead of getElementById
 navbar -> two times @click trigger. 
