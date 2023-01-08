@@ -1,4 +1,12 @@
-const { defineConfig } = require('@vue/cli-service')
-module.exports = defineConfig({
-  transpileDependencies: true
-})
+const PrerenderSPAPlugin = require('prerender-spa-plugin-next')
+
+module.exports = {
+  transpileDependencies: true,
+  configureWebpack: {
+    plugins: [
+      new PrerenderSPAPlugin({
+        routes: [ '/', '/topics', '/keyboard' ],
+      })
+    ]
+  }
+}
