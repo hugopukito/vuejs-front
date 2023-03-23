@@ -23,12 +23,15 @@ import { ref, onMounted } from "vue";
 import Spinner from "@/components/Spinner.vue"
 
 let message = ref("")
-let socket = ref(null)
+let socket
 let noMessages = ref(false)
 let isLoading = ref(true)
 
 onMounted(() => {
     let msg_container = document.getElementById("messages")
+    if (socket != null) {
+      socket.close()
+    }
     socket = new WebSocket(process.env.VUE_APP_WS_URL)
     socket.onopen = () => {
         isLoading.value = false
