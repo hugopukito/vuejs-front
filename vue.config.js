@@ -5,7 +5,7 @@ module.exports = {
   configureWebpack: {
     plugins: [
       new PrerenderSPAPlugin({
-        routes: [ '/', '/topics', '/keyboard' ],
+        routes: ['/topics', '/keyboard'],
       })
     ]
   }
