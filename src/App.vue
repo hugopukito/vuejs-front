@@ -1,15 +1,12 @@
 <template>
-  <NavBar @trigger-navbar="changeRouterView()"/>
-  <div id="router" class="router">
-    <router-view/>
-  </div>
+  <NavBar/>
+  <router-view/>
 </template>
 
 <script setup>
 import NavBar from "@/components/NavBar.vue"
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 
-let render = ref(true);
 var Buffer = require('buffer/').Buffer
 
 onMounted(() => {
@@ -31,16 +28,6 @@ function parseJwt (token) {
 
   return JSON.parse(jsonPayload);
 };
-
-function changeRouterView() {
-  if (document.getElementById("router").classList.contains("disable")) {
-    document.getElementById("router").classList.remove("disable");
-  } else {
-    setTimeout(() => {
-      document.getElementById("router").classList.add("disable");
-    }, 350);
-  }
-}
 </script>
 
 <style>
@@ -70,10 +57,5 @@ function changeRouterView() {
 a {
   text-decoration: none;
   color:coral;
-}
-@media screen and (max-device-width: 480px) {
-  .router.disable {
-    display: none;
-  }
 }
 </style>

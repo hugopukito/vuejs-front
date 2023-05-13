@@ -1,27 +1,30 @@
 <template>
-  <div id ="box" class="box">
+  <div class="box">
     <div @click="trigger_navbar()" style="margin-left: 1rem"> 
       <font-awesome-icon icon="fa-solid fa-bars" size="xl" /> 
     </div>
     <img class="luffy" src="@/assets/luffy.png">
   </div>
-  <nav id="nav"> 
-    <ul>
-      <li><router-link to="/" @click="trigger_navbar()"> Home </router-link> </li>
-      <li><router-link to="/topics" @click="trigger_navbar()"> Topics </router-link> </li>
-      <li><router-link to="/keyboard" @click="trigger_navbar()"> Keyboard </router-link> </li>
-      <li><router-link to="/monitoring" @click="trigger_navbar()"> Monitoring </router-link> </li>
-      <li><router-link to="/chat" @click="trigger_navbar()"> Chat </router-link> </li>
-      <div class="auth" v-if="userName === null">
-        <li> <a @click="trigger_navbar(); openSignup()"> Sign up </a> </li>
-        <li> <a @click="trigger_navbar(); openSignin()"> Sign in </a> </li>
-      </div>
-      <div class="auth" v-else>
-        <li> <a> {{ userName }} </a> </li>
-        <li> <a @click="logout()"> Sign out </a> </li>
-      </div>
-    </ul>
-  </nav>
+  <div class="nav-bar" @click="trigger_navbar()" :class="{ hide: hide }">
+    <div class="router-links">
+      <router-link to="/" > Home </router-link>
+      <router-link to="/topics"> Topics </router-link>
+      <router-link to="/keyboard"> Keyboard </router-link>
+      <router-link to="/monitoring"> Monitoring </router-link>
+      <router-link to="/chat"> Chat </router-link>
+      <router-link to="/game">
+        <span class="game-link"> Game 🕹️ </span>
+      </router-link>
+    </div>
+    <div class="auth" v-if="userName === null">
+      <div class="router-link" @click="openSignup()"> Sign up </div>
+      <div class="router-link" @click="openSignin()"> Sign in </div>
+    </div>
+    <div class="auth" v-else>
+      <div class="router-link"> {{ userName }} </div>
+      <div class="router-link" @click="logout()"> Sign out </div>
+    </div>
+  </div>
   <div>
     <Signup @modal-boolean="closeSignup()" @signup-worked="closeSignup(); openSignin()" :isModalOpen="isSignupOpen"/>
     <Signin @modal-boolean="closeSignin()" @signin-worked="closeSignin(); signin()" :isModalOpen="isSigninOpen"/>
@@ -29,18 +32,22 @@
 </template>
 
 <script setup>
-import { onMounted, ref, inject, provide } from "vue";
+import { onMounted, ref } from "vue";
 import Signup from "./Signup.vue";
 import Signin from "./Signin.vue";
 
-const emit = defineEmits(["triggerNavbar"]);
 const isSignupOpen = ref(false);
 const isSigninOpen = ref(false);
 let userName = ref(null);
+let hide = ref(true)
 
 onMounted(() => {
   userName.value = localStorage.getItem("userName");
 })
+
+function trigger_navbar() {
+  hide.value = !hide.value
+}
 
 function signin(){
   userName.value = localStorage.getItem("userName");
@@ -67,57 +74,40 @@ function openSignin() {
 function closeSignin() {
   isSigninOpen.value = false;
 }
-
-function trigger_navbar() {
-  emit("triggerNavbar");
-  if (document.getElementById("nav").classList.contains("active")) {
-    document.getElementById("nav").classList.remove("active");
-  } else {
-    document.getElementById("nav").classList.add("active");
-  }
-}
 </script>
 
-<style scoped>
-nav {
-  list-style: none;
-  text-align: center;
-}
+<style scoped lang="less">
+.nav-bar {
+  height: 60px;
+  
+  display: flex;
+  justify-content: space-between;
 
-.auth {
-  float: right;
-  cursor: pointer;
-}
-
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
   background-color: #333;
-  text-align: center;
 }
 
-li {
-  float: left;
-  display: inline;
-}
+.router-links, .auth {
+  display: flex;
+  > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
 
-li a {
-  display: inline-block;
-  text-decoration: none;
-  text-align: center;
-  font-size: 1.25em;
-  color: beige;
-  padding: 14px 16px;
-}
+    flex: 1;
 
-li a:hover {
-  background-color: #111;
+    font-size: 1.25em;
+    color: beige;
+    padding: 14px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #111;
+    }
+  }
 }
 
 .router-link-active {
-  font-weight: bold;
   color: aquamarine;
 }
 
@@ -126,47 +116,49 @@ li a:hover {
 }
 </style>
 
-<style scoped>
+<style scoped lang="less">
 @media screen and (max-device-width: 500px) {
-  nav {
-    position: absolute;
-    left: -100vw;
-    top: 7vh;
-  }
-  ul {
-    position: absolute;
+  .nav-bar {
+    height: calc(100vh - 60px);
+    height: calc(100dvh - 60px);
     width: 100vw;
-    height: 100vh;
-    display: flex;
+
+    flex-direction: column;
+
+    opacity: 1;
+    transition: opacity 350ms, transform 350ms;
+    transform: translateX(0);
+
+    position: absolute;
+    top: 60px;
+    left: 0;
+    z-index: 1;
+  }
+  .nav-bar.hide {
+    opacity: 0;
+    transform: translateX(-100%);
+    pointer-events: none;
+  }
+  .router-links, .auth {
     flex-direction: column;
   }
-  .auth {
-    margin-top: auto;
-    margin-bottom: 200px;
-    display: flex;
-    flex-direction: column;
-  } 
   .box {
     display: flex;
-    width: 100vw;
-    height: 7vh;
-    background-color: #333;
     align-items: center;
-    margin: 0;
+
+    width: 100vw;
+    height: 60px;
+    background-color: #333;
   }
   .box img {
     width: auto;
-    height: 7vh;
+    height: 60px;
   } 
   .luffy {
-    position:absolute;
-    left:0;
-    right:0;
-    margin:0 auto;
-  }
-  nav.active {
-    transition: 350ms;
+    position: absolute;
     left: 0;
+    right: 0;
+    margin: 0 auto;
   }
 }
 </style>

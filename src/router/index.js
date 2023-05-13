@@ -5,6 +5,7 @@ import Monitoring from "@/views/Monitoring.vue"
 import Chat from "@/views/Chat.vue"
 import NotFound from "@/views/NotFound.vue"
 import Keyboard from "@/views/Keyboard.vue"
+import Game from "@/views/Game.vue"
 
 const routes = [
     {
@@ -45,6 +46,14 @@ const routes = [
         component: Chat,
         meta: {
             title: "chat"
+        }
+    },
+    {
+        name: "Game",
+        path: "/game",
+        component: Game,
+        meta: {
+            title: "game"
         }
     },
     {
