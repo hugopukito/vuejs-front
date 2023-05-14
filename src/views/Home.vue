@@ -1,18 +1,16 @@
 <template>
-    <img src="@/assets/zoro_nobg.png">
+    <div class="main">
+        <img src="@/assets/zoro_nobg.png">
+    </div>
 </template>
 
-<style scoped>
-
-img {
-    margin-top: 1em;
-    height: calc(100vh - 4.5em);
-    padding-bottom: 0px;
-}
-
-@media screen and (max-device-width: 480px) {
+<style scoped lang="less">
+.main {
+    height: calc(100vh - 60px);
+    height: calc(100dvh - 60px);
+    overflow: hidden;
     img {
-        height: calc(95vh - 4.5em);
+        height: 100%;
     }
 }
 </style>
