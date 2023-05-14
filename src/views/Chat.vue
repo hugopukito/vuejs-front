@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import Spinner from "@/components/Spinner.vue"
 
 let message = ref("")
@@ -29,10 +29,7 @@ let isLoading = ref(true)
 
 onMounted(() => {
     let msg_container = document.getElementById("messages")
-    if (socket != null) {
-      socket.close()
-    }
-    socket = new WebSocket(process.env.VUE_APP_WS_URL)
+    socket = new WebSocket(process.env.VUE_APP_CHAT_URL)
     socket.onopen = () => {
         isLoading.value = false
     }
@@ -50,6 +47,10 @@ onMounted(() => {
             noMessages.value = true
         }
     }
+})
+
+onBeforeUnmount(() => {
+    socket.close()
 })
 
 function scrollBottom() {
