@@ -1,11 +1,8 @@
 <template>
   <div class="main" id="main">
     <div class="playground-container">
-      <canvas id="playground" class="playground"></canvas>
+      <canvas id="playground" class="playground" :height="height" :width="width"></canvas>
       <div v-if="isLoading" class="spinner"><Spinner/></div>
-    </div>
-    <div class="cat">
-      <span v-if="!isLoading" @click="send">🐱</span>
     </div>
   </div>
 </template>
@@ -14,21 +11,39 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import Spinner from "@/components/Spinner.vue"
 
+const height = 600
+const width = 1200
+const xOffset = 3
+const yOffset = 30
+
 let socket
+let context
 let isLoading = ref(true)
+let playerId
+let players = []
 
 onMounted(() => {
   initSocket()
   initPlayground()
+  window.addEventListener('keydown', handleKeyDown);
 })
 
 onBeforeUnmount(() => {
   socket.close()
+  window.removeEventListener('keydown', handleKeyDown);
 })
 
 function initPlayground() {
-  var canvas = document.getElementById("playground");
-  var context = canvas.getContext("2d");
+  var canvas = document.getElementById("playground")
+  context = canvas.getContext("2d")
+
+  canvas.height = height;
+  canvas.width = width;
+
+  context.fillStyle = "rgb(32, 32, 32)"
+  context.fillRect(0, 0, width, height)
+
+  context.font = "30px Arial"
 }
 
 function initSocket() {
@@ -37,14 +52,71 @@ function initSocket() {
     isLoading.value = false
   }
   socket.onmessage = (msg) => {
-    console.log(msg.data)
+    let json = JSON.parse(msg.data)
+    if ('delete' in json) {
+      players = players.filter(p => p.id != json.id)
+    } else if ('current' in json) {
+      playerId = json.id
+    } else {
+      if (!Array.isArray(json)) {
+        json = [json]
+      }
+      json.forEach(j => {
+        const index = players.findIndex(p => p.id == j.id)
+        if (index != -1) {
+          players[index] = j
+        } else {
+          players.push(j)
+        }
+      })
+    }
+    drawPlayers()
   }
 }
 
-function send() {
-  socket.send(JSON.stringify("test"))
+function drawPlayers() {
+  context.clearRect(0, 0, width, height);
+  players.map(p => {
+    context.fillText("🐝", p.position.x + xOffset, p.position.y + yOffset)
+  })
 }
 
+function sendPlayer(player) {
+  socket.send(JSON.stringify(player))
+}
+
+function handleKeyDown(event) {
+  const foundPlayer = players.find(p => p.id == playerId)
+  const position = foundPlayer.position
+  let player = {
+    id: playerId,
+    position: position
+  }
+  switch (event.key) {
+    case 'z':
+    case 'ArrowUp':
+      player.position.y -= 5
+      sendPlayer(player)
+      break;
+    case 'q':
+    case 'ArrowLeft':
+      player.position.x -= 5
+      sendPlayer(player)
+      break;
+    case 's':
+    case 'ArrowDown':
+      player.position.y += 5
+      sendPlayer(player)
+      break;
+    case 'd':
+    case 'ArrowRight':
+      player.position.x += 5
+      sendPlayer(player)
+      break;
+    default:
+      break;
+  }
+}
 </script>
 
 <style scoped lang="less">
@@ -72,18 +144,7 @@ function send() {
       z-index: 1;
     }
     canvas.playground {
-      height: 600px;
-      width: 1200px;
       border: 1px solid antiquewhite;
-    }
-  }
-
-  .cat {
-    height: 50px;
-    width: 50px;
-    font-size: 50px;
-    span {
-      cursor: pointer;
     }
   }
 }

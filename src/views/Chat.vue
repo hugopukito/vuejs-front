@@ -67,7 +67,7 @@ function sendMessage() {
     if (userName === null) {
         userName = "anonymous"
     }
-    let msg = {
+    const msg = {
         "name": userName,
         "message": message.value
     }
