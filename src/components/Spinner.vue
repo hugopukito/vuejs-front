@@ -1,10 +1,21 @@
 <template>
-  <div class="orbit-spinner">
+  <div class="orbit-spinner" :style="`width: ${size}px; height: ${size}px;`">
     <div class="orbit"></div>
     <div class="orbit"></div>
     <div class="orbit"></div>
   </div>
 </template>
+
+<script setup>
+import { defineProps } from 'vue'
+
+const props = defineProps({
+  size: {
+    type: Number,
+    default: 20
+  }
+})
+</script>
 
 <style scoped>
 .orbit-spinner, .orbit-spinner * {
@@ -12,8 +23,6 @@
 }
 
 .orbit-spinner {
-  height: 20px;
-  width: 20px;
   border-radius: 50%;
   perspective: 800px;
 }

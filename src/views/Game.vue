@@ -2,7 +2,7 @@
   <div class="main" id="main">
     <div class="playground-container">
       <canvas id="playground" class="playground" :height="height" :width="width"></canvas>
-      <div v-if="isLoading" class="spinner"><Spinner/></div>
+      <div v-if="isLoading" class="spinner"><Spinner :size="40"/></div>
     </div>
   </div>
 </template>
@@ -17,13 +17,16 @@ const width = 1200
 let socket
 let context
 let isLoading = ref(true)
-let playerId
+let currentPlayer
 let players = []
+let keys = {}
 
 onMounted(() => {
   initSocket()
   initPlayground()
+  gameLoop()
   window.addEventListener('keydown', handleKeyDown);
+  window.addEventListener('keyup', handleKeyUp);
 })
 
 onBeforeUnmount(() => {
@@ -38,10 +41,10 @@ function initPlayground() {
   canvas.height = height;
   canvas.width = width;
 
-  context.fillStyle = "rgb(32, 32, 32)"
-  context.fillRect(0, 0, width, height)
+  context.font = "34px Arial"
 
-  context.font = "30px Arial"
+  context.fillStyle = "rgb(191, 161, 161)"
+  context.fillRect(0, 0, width, height)
 }
 
 function initSocket() {
@@ -54,7 +57,7 @@ function initSocket() {
     if ('delete' in json) {
       players = players.filter(p => p.id != json.id)
     } else if ('current' in json) {
-      playerId = json.id
+      currentPlayer = players.find(p => p.id == json.id)
     } else {
       if (!Array.isArray(json)) {
         json = [json]
@@ -73,9 +76,9 @@ function initSocket() {
 }
 
 function drawPlayers() {
-  context.clearRect(0, 0, width, height);
+  context.fillRect(0, 0, width, height);
   players.map(p => {
-    context.fillText(p.emoji, p.position.x, p.position.y)
+    context.strokeText(p.emoji, p.position.x, p.position.y);
   })
 }
 
@@ -83,37 +86,46 @@ function sendPlayer(player) {
   socket.send(JSON.stringify(player))
 }
 
-function handleKeyDown(event) {
-  const foundPlayer = players.find(p => p.id == playerId)
-  let player = {
-    id: playerId,
-    position: foundPlayer.position,
-    emoji: foundPlayer.emoji
+function gameLoop() {
+  // LEFT
+  if (keys[37] || keys[81]) {
+    currentPlayer.position.x = (currentPlayer.position.x - 2 + width) % width;
+    sendPlayer(currentPlayer);
   }
-  switch (event.key) {
-    case 'z':
-    case 'ArrowUp':
-      player.position.y = (player.position.y - height/20 + height) % height;
-      sendPlayer(player);
-      break;
-    case 'q':
-    case 'ArrowLeft':
-      player.position.x = (player.position.x - height/20 + width) % width;
-      sendPlayer(player);
-      break;
-    case 's':
-    case 'ArrowDown':
-      player.position.y = (player.position.y + height/20) % height;
-      sendPlayer(player);
-      break;
-    case 'd':
-    case 'ArrowRight':
-      player.position.x = (player.position.x + height/20) % width;
-      sendPlayer(player);
+  // RIGHT
+  if (keys[39] || keys[68]) {
+    currentPlayer.position.x = (currentPlayer.position.x + 2) % width;
+    sendPlayer(currentPlayer);
+  }
+  // UP
+  if (keys[38] || keys[90]) {
+    currentPlayer.position.y = (currentPlayer.position.y - 2 + height) % height;
+    sendPlayer(currentPlayer);
+  }
+  // DOWN
+  if (keys[40] || keys[83]) {
+    currentPlayer.position.y = (currentPlayer.position.y + 2) % height;
+    sendPlayer(currentPlayer);
+  }
+  
+  requestAnimationFrame(gameLoop)
+}
+
+function handleKeyDown(event) {
+  keys[event.keyCode] = true
+  switch (event.keyCode) {
+    case 38: // UP arrow key
+    case 40: // DOWN arrow key
+      event.preventDefault() // Prevent scrolling
       break;
     default:
+      // Allow default behavior for other keys
       break;
   }
+}
+
+function handleKeyUp(event) {
+  delete keys[event.keyCode]
 }
 </script>
 
