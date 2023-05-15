@@ -13,8 +13,6 @@ import Spinner from "@/components/Spinner.vue"
 
 const height = 600
 const width = 1200
-const xOffset = 3
-const yOffset = 30
 
 let socket
 let context
@@ -77,7 +75,7 @@ function initSocket() {
 function drawPlayers() {
   context.clearRect(0, 0, width, height);
   players.map(p => {
-    context.fillText("🐝", p.position.x + xOffset, p.position.y + yOffset)
+    context.fillText(p.emoji, p.position.x, p.position.y)
   })
 }
 
@@ -87,31 +85,31 @@ function sendPlayer(player) {
 
 function handleKeyDown(event) {
   const foundPlayer = players.find(p => p.id == playerId)
-  const position = foundPlayer.position
   let player = {
     id: playerId,
-    position: position
+    position: foundPlayer.position,
+    emoji: foundPlayer.emoji
   }
   switch (event.key) {
     case 'z':
     case 'ArrowUp':
-      player.position.y -= 5
-      sendPlayer(player)
+      player.position.y = (player.position.y - height/20 + height) % height;
+      sendPlayer(player);
       break;
     case 'q':
     case 'ArrowLeft':
-      player.position.x -= 5
-      sendPlayer(player)
+      player.position.x = (player.position.x - height/20 + width) % width;
+      sendPlayer(player);
       break;
     case 's':
     case 'ArrowDown':
-      player.position.y += 5
-      sendPlayer(player)
+      player.position.y = (player.position.y + height/20) % height;
+      sendPlayer(player);
       break;
     case 'd':
     case 'ArrowRight':
-      player.position.x += 5
-      sendPlayer(player)
+      player.position.x = (player.position.x + height/20) % width;
+      sendPlayer(player);
       break;
     default:
       break;
