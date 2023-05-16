@@ -2,7 +2,8 @@
   <div class="main" id="main">
     <div class="playground-container">
       <canvas id="playground" class="playground" :height="height" :width="width"></canvas>
-      <div v-if="isLoading" class="spinner"><Spinner :size="40"/></div>
+      <div v-if="isLoading" class="spinner"><Spinner :size="40" :color="'purple'"/></div>
+      <div v-if="isError" class="error">Error</div>
     </div>
   </div>
 </template>
@@ -17,6 +18,7 @@ const width = 1200
 let socket
 let context
 let isLoading = ref(true)
+let isError = ref(false)
 let currentPlayer
 let players = []
 let keys = {}
@@ -57,7 +59,7 @@ function initSocket() {
     if ('delete' in json) {
       players = players.filter(p => p.id != json.id)
     } else if ('current' in json) {
-      currentPlayer = players.find(p => p.id == json.id)
+      currentPlayer = players.find(p => p.id == json.player.id)
     } else {
       if (!Array.isArray(json)) {
         json = [json]
@@ -72,6 +74,19 @@ function initSocket() {
       })
     }
     drawPlayers()
+  }
+  socket.onerror = () => {
+    players = []
+    isError.value = true
+    isLoading.value = false
+    context.fillRect(0, 0, width, height)
+  }
+  socket.onclose = () => {
+    players = []
+    context.fillRect(0, 0, width, height)
+    setTimeout(() => {
+      isError.value = true
+    }, 500)
   }
 }
 
@@ -142,7 +157,7 @@ function handleKeyUp(event) {
 
   .playground-container {
     position: relative;
-    .spinner {
+    .spinner, .error {
       position: absolute;
       top: 0;
       left: 0;
@@ -152,6 +167,10 @@ function handleKeyUp(event) {
       justify-content: center;
       align-items: center;
       z-index: 1;
+    }
+    .error {
+      color: purple;
+      font-size: 30px;
     }
     canvas.playground {
       border: 1px solid antiquewhite;

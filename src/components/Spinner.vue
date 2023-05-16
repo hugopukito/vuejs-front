@@ -1,8 +1,8 @@
 <template>
   <div class="orbit-spinner" :style="`width: ${size}px; height: ${size}px;`">
-    <div class="orbit"></div>
-    <div class="orbit"></div>
-    <div class="orbit"></div>
+    <div class="orbit" :style="`border-color: ${color}`"></div>
+    <div class="orbit" :style="`border-color: ${color}`"></div>
+    <div class="orbit" :style="`border-color: ${color}`"></div>
   </div>
 </template>
 
@@ -13,6 +13,10 @@ const props = defineProps({
   size: {
     type: Number,
     default: 20
+  },
+  color: {
+    type: String,
+    default: 'white'
   }
 })
 </script>
@@ -39,21 +43,21 @@ const props = defineProps({
   left: 0%;
   top: 0%;
   animation: orbit-spinner-orbit-one-animation 1200ms linear infinite;
-  border-bottom: 3px solid white;
+  border-bottom: 3px solid;
 }
 
 .orbit-spinner .orbit:nth-child(2) {
   right: 0%;
   top: 0%;
   animation: orbit-spinner-orbit-two-animation 1200ms linear infinite;
-  border-right: 3px solid white;
+  border-right: 3px solid;
 }
 
 .orbit-spinner .orbit:nth-child(3) {
   right: 0%;
   bottom: 0%;
   animation: orbit-spinner-orbit-three-animation 1200ms linear infinite;
-  border-top: 3px solid white;
+  border-top: 3px solid;
 }
 
 @keyframes orbit-spinner-orbit-one-animation {
