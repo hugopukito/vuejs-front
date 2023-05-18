@@ -1,5 +1,9 @@
 <template>
   <div class="main" id="main">
+    <div class="top">
+      <div class="h3"> Multiplayer Low latency game 😋 !</div>
+      <div class="new-player"><a href="/game" onclick="window.open(this.href, 'new', 'popup'); return false;">Another one</a></div>
+    </div>
     <div class="playground-container">
       <canvas id="playground" class="playground" :height="height" :width="width"></canvas>
       <div v-if="isLoading" class="spinner"><Spinner :size="40" :color="'purple'"/></div>
@@ -146,16 +150,31 @@ function handleKeyUp(event) {
 
 <style scoped lang="less">
 .main {
-  height: calc(100vh - 60px);
-  height: calc(100dvh - 60px);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 30px;
-
+  .top {
+    height: 60px;
+    margin-top: 30px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .new-player {
+      a {
+        color: antiquewhite;
+        &:hover {
+          color: coral;
+        }
+      }
+    }
+  }
   .playground-container {
+    // calc base on .navbar (60px) + .top (90px)
+    height: calc(100vh - 150px);
+    height: calc(100dvh - 150px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     position: relative;
     .spinner, .error {
       position: absolute;
