@@ -2,7 +2,9 @@
   <div class="main" id="main">
     <div class="top">
       <div class="h3"> Multiplayer Low latency game 😋 !</div>
-      <div class="new-player"><a href="/game" onclick="window.open(this.href, 'new', 'popup'); return false;">Another one</a></div>
+      <div class="new-player">
+        <a href="/game" onclick="window.open(this.href, 'new', 'popup'); return false;">Another one</a>
+      </div>
     </div>
     <div class="playground-container">
       <canvas id="playground" class="playground" :height="height" :width="width"></canvas>
@@ -151,7 +153,7 @@ function handleKeyUp(event) {
 <style scoped lang="less">
 .main {
   .top {
-    height: 60px;
+    height: 90px;
     margin-top: 30px;
     
     display: flex;
@@ -161,15 +163,16 @@ function handleKeyUp(event) {
       a {
         color: antiquewhite;
         &:hover {
+          cursor: pointer;
           color: coral;
         }
       }
     }
   }
   .playground-container {
-    // calc base on .navbar (60px) + .top (90px)
-    height: calc(100vh - 150px);
-    height: calc(100dvh - 150px);
+    // calc base on .navbar (60px) + .top (120px)
+    height: calc(100vh - 180px);
+    height: calc(100dvh - 180px);
 
     display: flex;
     justify-content: center;
