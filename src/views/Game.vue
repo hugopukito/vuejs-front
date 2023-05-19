@@ -3,7 +3,7 @@
     <div class="top">
       <div class="h3"> Multiplayer Low latency game 😋 !</div>
       <div class="new-player">
-        <a href="/game" onclick="window.open(this.href, 'new', 'popup'); return false;">Another one</a>
+        <a href="/game" target="_blank">Another one</a>
       </div>
     </div>
     <div class="playground-container">
