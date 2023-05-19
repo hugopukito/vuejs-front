@@ -79,7 +79,6 @@ function initSocket() {
         }
       })
     }
-    drawPlayers()
   }
   socket.onerror = () => {
     players = []
@@ -128,7 +127,7 @@ function gameLoop() {
     currentPlayer.position.y = (currentPlayer.position.y + 2) % height;
     sendPlayer(currentPlayer);
   }
-  
+  drawPlayers()
   requestAnimationFrame(gameLoop)
 }
 
