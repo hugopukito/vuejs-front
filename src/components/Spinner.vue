@@ -7,9 +7,7 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
-
-const props = defineProps({
+defineProps({
   size: {
     type: Number,
     default: 20
