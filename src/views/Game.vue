@@ -28,6 +28,7 @@ let isLoading = ref(true)
 let isError = ref(false)
 
 let currentPlayer
+let jumping = 0
 
 let players = []
 let keys = {}
@@ -113,16 +114,30 @@ function gameLoop() {
   // LEFT
   if (keys[37] || keys[81]) {
     currentPlayer.position.x = (currentPlayer.position.x - 2 + width) % width
-    sendPlayer(currentPlayer)
   }
   // RIGHT
   if (keys[39] || keys[68]) {
     currentPlayer.position.x = (currentPlayer.position.x + 2) % width
-    sendPlayer(currentPlayer)
   }
   // JUMP
   if (keys[32]) {
-    console.log("jump gameloop")
+    if (jumping < 20) {
+      currentPlayer.position.y -= 4
+    }
+  }
+
+  jumping++
+
+  if (currentPlayer) {
+    currentPlayer.position.y += 1
+  }
+
+  if (currentPlayer && currentPlayer.position.y > height/2) {
+    currentPlayer.position.y = height/2
+    jumping = 0
+  }
+
+  if (currentPlayer) {
     sendPlayer(currentPlayer)
   }
   drawPlayers()
@@ -136,8 +151,6 @@ function handleKeyDown(event) {
     case 40: // DOWN arrow key
       event.preventDefault() // Prevent scrolling
       break
-    case 32:
-      console.log("jump keydown")
     default:
       // Allow default behavior for other keys
       break
