@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import Spinner from "@/components/Spinner.vue"
 
 const height = 600
@@ -23,9 +23,12 @@ const width = 1200
 
 let socket
 let context
+
 let isLoading = ref(true)
 let isError = ref(false)
+
 let currentPlayer
+
 let players = []
 let keys = {}
 
@@ -33,21 +36,21 @@ onMounted(() => {
   initSocket()
   initPlayground()
   gameLoop()
-  window.addEventListener('keydown', handleKeyDown);
-  window.addEventListener('keyup', handleKeyUp);
+  window.addEventListener('keydown', handleKeyDown)
+  window.addEventListener('keyup', handleKeyUp)
 })
 
 onBeforeUnmount(() => {
   socket.close()
-  window.removeEventListener('keydown', handleKeyDown);
+  window.removeEventListener('keydown', handleKeyDown)
 })
 
 function initPlayground() {
   var canvas = document.getElementById("playground")
   context = canvas.getContext("2d")
 
-  canvas.height = height;
-  canvas.width = width;
+  canvas.height = height
+  canvas.width = width
 
   context.font = "34px Arial"
 
@@ -96,9 +99,9 @@ function initSocket() {
 }
 
 function drawPlayers() {
-  context.fillRect(0, 0, width, height);
+  context.fillRect(0, 0, width, height)
   players.map(p => {
-    context.strokeText(p.emoji, p.position.x, p.position.y);
+    context.strokeText(p.emoji, p.position.x, p.position.y)
   })
 }
 
@@ -109,23 +112,18 @@ function sendPlayer(player) {
 function gameLoop() {
   // LEFT
   if (keys[37] || keys[81]) {
-    currentPlayer.position.x = (currentPlayer.position.x - 2 + width) % width;
-    sendPlayer(currentPlayer);
+    currentPlayer.position.x = (currentPlayer.position.x - 2 + width) % width
+    sendPlayer(currentPlayer)
   }
   // RIGHT
   if (keys[39] || keys[68]) {
-    currentPlayer.position.x = (currentPlayer.position.x + 2) % width;
-    sendPlayer(currentPlayer);
+    currentPlayer.position.x = (currentPlayer.position.x + 2) % width
+    sendPlayer(currentPlayer)
   }
-  // UP
-  if (keys[38] || keys[90]) {
-    currentPlayer.position.y = (currentPlayer.position.y - 2 + height) % height;
-    sendPlayer(currentPlayer);
-  }
-  // DOWN
-  if (keys[40] || keys[83]) {
-    currentPlayer.position.y = (currentPlayer.position.y + 2) % height;
-    sendPlayer(currentPlayer);
+  // JUMP
+  if (keys[32]) {
+    console.log("jump gameloop")
+    sendPlayer(currentPlayer)
   }
   drawPlayers()
   requestAnimationFrame(gameLoop)
@@ -137,10 +135,12 @@ function handleKeyDown(event) {
     case 38: // UP arrow key
     case 40: // DOWN arrow key
       event.preventDefault() // Prevent scrolling
-      break;
+      break
+    case 32:
+      console.log("jump keydown")
     default:
       // Allow default behavior for other keys
-      break;
+      break
   }
 }
 
