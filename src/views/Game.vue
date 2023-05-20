@@ -126,7 +126,7 @@ function gameLoop() {
   }
     
   // JUMP
-  if (keys[32]) {
+  if (keys[38] || keys[32]) {
     if (jumping < 20) {
       currentPlayer.position.y -= 4
     }
