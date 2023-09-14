@@ -10,24 +10,24 @@
       <router-link to="/" > Home </router-link>
       <router-link to="/topics"> Topics </router-link>
       <router-link to="/keyboard"> Keyboard </router-link>
-      <router-link to="/monitoring"> Monitoring </router-link>
+      <!-- <router-link to="/monitoring"> Monitoring </router-link>
       <router-link to="/chat"> Chat </router-link>
       <router-link to="/game">
         <span class="game-link"> Game 🕹️ </span>
-      </router-link>
+      </router-link> -->
     </div>
-    <div class="auth" v-if="userName === null">
+    <!-- <div class="auth" v-if="userName === null">
       <div class="router-link" @click="openSignup()"> Sign up </div>
       <div class="router-link" @click="openSignin()"> Sign in </div>
     </div>
     <div class="auth" v-else>
       <div class="router-link"> {{ userName }} </div>
       <div class="router-link" @click="logout()"> Sign out </div>
-    </div>
+    </div> -->
   </div>
   <div>
-    <Signup @modal-boolean="closeSignup()" @signup-worked="closeSignup(); openSignin()" :isModalOpen="isSignupOpen"/>
-    <Signin @modal-boolean="closeSignin()" @signin-worked="closeSignin(); signin()" :isModalOpen="isSigninOpen"/>
+    <!-- <Signup @modal-boolean="closeSignup()" @signup-worked="closeSignup(); openSignin()" :isModalOpen="isSignupOpen"/>
+    <Signin @modal-boolean="closeSignin()" @signin-worked="closeSignin(); signin()" :isModalOpen="isSigninOpen"/> -->
   </div>
 </template>
 
@@ -47,6 +47,13 @@ onMounted(() => {
 
 function trigger_navbar() {
   hide.value = !hide.value
+  if (window.innerWidth < 500 && (window.getComputedStyle(document.body).overflow !== "hidden" || window.getComputedStyle(document.documentElement).overflow !== "hidden")) {
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "visible";
+    document.documentElement.style.overflow = "visible";
+  }
 }
 
 function signin(){
@@ -81,7 +88,8 @@ function closeSignin() {
   height: 60px;
   
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
+  justify-content: center;
 
   background-color: #333;
 }
@@ -124,6 +132,7 @@ function closeSignin() {
     width: 100vw;
 
     flex-direction: column;
+    justify-content: space-between;
 
     opacity: 1;
     transition: opacity 350ms, transform 350ms;

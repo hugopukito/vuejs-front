@@ -32,30 +32,30 @@ const routes = [
             title: "keyboard"
         }
     },
-    {
-        name: "Monitoring",
-        path: "/monitoring",
-        component: Monitoring,
-        meta: {
-            title: "monitoring"
-        }
-    },
-    {
-        name: "Chat",
-        path: "/chat",
-        component: Chat,
-        meta: {
-            title: "chat"
-        }
-    },
-    {
-        name: "Game",
-        path: "/game",
-        component: Game,
-        meta: {
-            title: "game"
-        }
-    },
+    // {
+    //     name: "Monitoring",
+    //     path: "/monitoring",
+    //     component: Monitoring,
+    //     meta: {
+    //         title: "monitoring"
+    //     }
+    // },
+    // {
+    //     name: "Chat",
+    //     path: "/chat",
+    //     component: Chat,
+    //     meta: {
+    //         title: "chat"
+    //     }
+    // },
+    // {
+    //     name: "Game",
+    //     path: "/game",
+    //     component: Game,
+    //     meta: {
+    //         title: "game"
+    //     }
+    // },
     {
         name: "NotFound",
         path: "/:pathMatch(.*)",

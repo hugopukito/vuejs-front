@@ -31,8 +31,13 @@ function parseJwt (token) {
 </script>
 
 <style>
+@font-face {
+  font-family: "FjallaOne";
+  src: url("assets/fonts/FjallaOne-Regular.ttf") format("truetype"),
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'FjallaOne', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
